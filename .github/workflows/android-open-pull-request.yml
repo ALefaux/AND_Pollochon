@@ -1,0 +1,19 @@
+name: Android Feature Branch CI
+
+on:
+  push:
+    branches:
+      - '*'
+      - '!master'
+      - '!release*'
+
+jobs:
+  auto-pull-request:
+    name: Open pull request after push
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: pull-request-action
+        uses: vsoch/pull-request-action@1.0.6
+        env:
+          PULL_REQUEST_BRANCH: "master"
