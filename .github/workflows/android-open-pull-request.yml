@@ -3,8 +3,7 @@ name: Android Feature Branch CI
 on:
   push:
     branches:
-      - '*'
-      - '!master'
+      - '*/*'
 
 jobs:
   auto-pull-request:
