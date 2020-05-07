@@ -1,0 +1,27 @@
+name: Open pull request after push
+
+on:
+  push:
+    branches:
+      - '*/*'
+
+jobs:
+  open-pull-request:
+    name: Open the pull request
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: open-pull-request-action
+        uses: vsoch/pull-request-action@1.0.6
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  valid-pull-request:
+    name: Valid the pull request
+    needs: open-pull-request
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: valid-pull-request-action
+        uses: hmarr/auto-approve-action@v2.0.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
