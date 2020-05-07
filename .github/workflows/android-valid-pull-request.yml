@@ -3,10 +3,12 @@ name: Valid pull request after open it
 on:
   pull_request
 
-  jobs:
-    build:
-      runs-on: ubuntu-latest
-      steps:
-        - uses: hmarr/auto-approve-action@v2.0.0
-          with:
-            github-token: "${{ secrets.GITHUB_TOKEN }}"
+jobs:
+  build:
+    name: Build project
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: hmarr/auto-approve-action@v2.0.0
+        with:
+          github-token: "${{ secrets.GITHUB_TOKEN }}"
