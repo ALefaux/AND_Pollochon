@@ -1,4 +1,4 @@
-name: Android Feature Branch CI
+name: Open pull request after push
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
 
 jobs:
   auto-pull-request:
-    name: Open pull request after push
+    name: Open the pull request
     runs-on: ubuntu-latest
 
     steps:
