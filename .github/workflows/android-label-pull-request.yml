@@ -1,4 +1,4 @@
-name: Merge pull request after review submitted
+name: Add label on pull request after review submitted
 
 on:
   pull_request_review:
