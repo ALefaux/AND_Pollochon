@@ -14,6 +14,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Label when approved
+        uses: pullreminders/label-when-approved-action@master
+        env:
+          APPROVALS: "1"
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ADD_LABEL: "automerge"
       - name: automerge
         uses: "pascalgn/automerge-action@7ab42e888a333bf77ce865bc84fedc6a365a3548"
         env:
