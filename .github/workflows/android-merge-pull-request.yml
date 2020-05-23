@@ -1,0 +1,20 @@
+name: Merge pull request after review submitted
+
+on:
+  pull_request_review:
+    types:
+      - submitted
+  check_suite:
+    types:
+      - completed
+
+jobs:
+  automerge:
+    name: Auto merge the pull request
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: automerge
+        uses: "pascalgn/automerge-action@0.8.3"
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
