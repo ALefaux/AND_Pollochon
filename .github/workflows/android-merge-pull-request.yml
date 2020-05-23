@@ -1,9 +1,9 @@
 name: Merge pull request after review submitted
 
 on:
-  pull_request:
+  pull_request_review:
     types:
-      - labeled
+      - submitted
   check_suite:
     types:
       - completed
@@ -17,4 +17,5 @@ jobs:
       - name: automerge
         uses: "pascalgn/automerge-action@7ab42e888a333bf77ce865bc84fedc6a365a3548"
         env:
+          MERGE_LABELS: ""
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
