@@ -63,7 +63,7 @@ captures/
 .externalNativeBuild
 
 # Google Services (e.g. APIs or Firebase)
-# google-services.json
+# ic_google_resize-services.json
 
 # Freeline
 freeline.py

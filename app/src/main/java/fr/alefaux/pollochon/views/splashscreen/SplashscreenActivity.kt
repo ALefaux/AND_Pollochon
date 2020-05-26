@@ -14,12 +14,12 @@ class SplashscreenActivity : AppCompatActivity(R.layout.activity_splashscreen) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        lifecycleScope.launch {
-            delay(3000)
-            val intent = Intent(applicationContext, HomeActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
+//        lifecycleScope.launch {
+//            delay(3000)
+//            val intent = Intent(applicationContext, HomeActivity::class.java)
+//            startActivity(intent)
+//            finish()
+//        }
     }
 
 }
