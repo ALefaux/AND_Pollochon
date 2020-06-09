@@ -6,6 +6,19 @@
 
     <fragment
         android:id="@+id/splashscreenFragment"
-        android:name="fr.alefaux.pollochon.views.splashscreen.SplashscreenFragment" />
+        android:name="fr.alefaux.pollochon.views.splashscreen.SplashscreenFragment">
+        <action
+            android:id="@+id/to_loginPhoneDialogFragment"
+            app:destination="@id/loginPhoneDialogFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/loginPhoneDialogFragment"
+        android:name="fr.alefaux.pollochon.views.splashscreen.LoginPhoneFragment">
+        <argument
+            android:name="callingCodes"
+            app:argType="fr.alefaux.pollochon.models.CallingCode[]" />
+    </fragment>
+
 
 </navigation>

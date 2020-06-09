@@ -1,6 +1,7 @@
 package fr.alefaux.pollochon
 
 import android.app.Application
+import fr.alefaux.pollochon.di.busModule
 import fr.alefaux.pollochon.di.splashscreenModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
@@ -15,6 +16,7 @@ class App : Application() {
             androidContext(this@App)
             modules(
                 listOf(
+                    busModule,
                     splashscreenModule
                 )
             )
