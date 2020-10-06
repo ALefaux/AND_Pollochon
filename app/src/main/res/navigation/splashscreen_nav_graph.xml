@@ -14,7 +14,18 @@
 
     <fragment
         android:id="@+id/loginPhoneDialogFragment"
-        android:name="fr.alefaux.pollochon.views.splashscreen.LoginPhoneFragment">
+        android:name="fr.alefaux.pollochon.views.splashscreen.loginphone.LoginPhoneFragment">
+        <action
+            android:id="@+id/to_callingCodesFragment"
+            app:destination="@id/callingCodesFragment" />
+        <argument
+            android:name="callingCodes"
+            app:argType="fr.alefaux.pollochon.models.CallingCode[]" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/callingCodesFragment"
+        android:name="fr.alefaux.pollochon.views.splashscreen.callingcodes.CallingCodesFragment">
         <argument
             android:name="callingCodes"
             app:argType="fr.alefaux.pollochon.models.CallingCode[]" />

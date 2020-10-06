@@ -1,4 +1,4 @@
-package fr.alefaux.pollochon.views.splashscreen
+package fr.alefaux.pollochon.views.splashscreen.loginphone
 
 import android.os.Bundle
 import android.text.Editable
@@ -8,9 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.github.twocoffeesoneteam.glidetovectoryou.GlideToVectorYou
-import com.google.android.material.snackbar.Snackbar
 import fr.alefaux.pollochon.databinding.FragmentLoginPhoneBinding
 
 class LoginPhoneFragment : Fragment() {
@@ -37,7 +37,8 @@ class LoginPhoneFragment : Fragment() {
 
         }
         binding.clLoginPhoneCallingCode.setOnClickListener {
-            Snackbar.make(view, "Go to next view!", Snackbar.LENGTH_LONG).show()
+            val directions = LoginPhoneFragmentDirections.toCallingCodesFragment(args.callingCodes)
+            findNavController().navigate(directions)
         }
         binding.etLoginPhone.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {

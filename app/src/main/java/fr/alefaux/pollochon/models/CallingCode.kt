@@ -25,3 +25,14 @@ data class Translations(
     @SerializedName("hr") val croatian: String,
     @SerializedName("fa") val persian: String
 ) : Parcelable
+
+enum class CallingCodeRowType {
+    HEADER,
+    ITEM
+}
+
+data class CallingCodeRow(
+    val callingCodeRowType: CallingCodeRowType,
+    val headerTitle: String,
+    val callingCode: CallingCode
+)
