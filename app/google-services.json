@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "606817325383",
+    "firebase_url": "https://pollochon-44882.firebaseio.com",
+    "project_id": "pollochon-44882",
+    "storage_bucket": "pollochon-44882.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:606817325383:android:1221f1891d7ff7dc76fc62",
+        "android_client_info": {
+          "package_name": "fr.alefaux.pollochon"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "606817325383-942fmifgal3o0l74qir3qgiuclfhlr64.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCE_rAutHYRV11uxcx1eKnLAmPNXxgjGBY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "606817325383-942fmifgal3o0l74qir3qgiuclfhlr64.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "606817325383-h75gck5mi2l5cfc39ucnfeej8ft17imh.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "fr.alefaux.pollochon"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

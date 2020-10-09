@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/splashscreen_nav_graph"
+    app:startDestination="@id/splashscreenFragment">
+
+    <fragment
+        android:id="@+id/splashscreenFragment"
+        android:name="fr.alefaux.pollochon.views.splashscreen.SplashscreenFragment">
+        <action
+            android:id="@+id/to_loginPhoneDialogFragment"
+            app:destination="@id/loginPhoneDialogFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/loginPhoneDialogFragment"
+        android:name="fr.alefaux.pollochon.views.splashscreen.loginphone.LoginPhoneFragment">
+        <action
+            android:id="@+id/to_callingCodesFragment"
+            app:destination="@id/callingCodesFragment" />
+        <argument
+            android:name="callingCodes"
+            app:argType="fr.alefaux.pollochon.models.CallingCode[]" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/callingCodesFragment"
+        android:name="fr.alefaux.pollochon.views.splashscreen.callingcodes.CallingCodesFragment">
+        <argument
+            android:name="callingCodes"
+            app:argType="fr.alefaux.pollochon.models.CallingCode[]" />
+    </fragment>
+
+
+</navigation>

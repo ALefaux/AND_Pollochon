@@ -3,4 +3,15 @@
     <style name="SplashscreenTheme" parent="Theme.MaterialComponents.NoActionBar">
 
     </style>
+
+    <style name="SplashscreenTheme.Button" parent="Widget.MaterialComponents.Button">
+        <item name="cornerRadius">8dp</item>
+        <item name="backgroundTint">@color/colorButtonBackground</item>
+        <item name="android:textColor">@color/colorButtonText</item>
+    </style>
+
+    <style name="SplashscreenTheme.Button.TextButton" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:textColor">@color/colorButtonTextSecondary</item>
+    </style>
+
 </resources>
