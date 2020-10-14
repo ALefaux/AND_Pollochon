@@ -2,9 +2,8 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/app_nav_graph"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/polls_nav_graph">
 
-    <fragment android:id="@+id/homeFragment"
-        android:name="fr.alefaux.pollochon.views.home.HomeFragment" />
+    <include app:graph="@navigation/polls_nav_graph" />
 
 </navigation>
