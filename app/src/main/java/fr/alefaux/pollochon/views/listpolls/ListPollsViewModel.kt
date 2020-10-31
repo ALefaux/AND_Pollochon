@@ -1,27 +1,36 @@
 package fr.alefaux.pollochon.views.listpolls
 
+import androidx.hilt.lifecycle.ViewModelInject
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import fr.alefaux.pollochon.BaseViewModel
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.liveData
+import dagger.hilt.android.scopes.ActivityScoped
 import fr.alefaux.pollochon.models.Poll
+import fr.alefaux.pollochon.models.ResultData
 import fr.alefaux.pollochon.usecases.ListPollsUseCase
-import org.greenrobot.eventbus.EventBus
+import kotlinx.coroutines.Dispatchers
+import java.lang.Exception
 
-class ListPollsViewModel(
-    private val listPollsUseCase: ListPollsUseCase,
-    errorBus: EventBus
-) : BaseViewModel(errorBus) {
+@ActivityScoped
+class ListPollsViewModel @ViewModelInject constructor(
+    private val listPollsUseCase: ListPollsUseCase
+) : ViewModel() {
 
-    val pollsLiveData = MutableLiveData<List<Poll>>()
-    val pollsErrorLiveData = MutableLiveData<Unit>()
+    private var _pollsLiveData: LiveData<ResultData<List<Poll>>> = MutableLiveData()
+    val pollsLiveData: LiveData<ResultData<List<Poll>>> get() = _pollsLiveData
 
     fun getAll() {
-        viewModelNetworkCall({
-            listPollsUseCase.getPolls()
-        }, onSuccess = {
-            pollsLiveData.postValue(it)
-        }, onError = {
-            pollsErrorLiveData.postValue(Unit)
-        })
+        _pollsLiveData = liveData(Dispatchers.IO) {
+            emit(ResultData.Loading())
+
+            try {
+                emit(listPollsUseCase.getPolls())
+            } catch (e: Exception) {
+                e.printStackTrace()
+                emit(ResultData.Exception())
+            }
+        }
     }
 
 }

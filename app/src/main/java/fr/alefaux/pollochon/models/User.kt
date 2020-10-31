@@ -9,4 +9,6 @@ data class User(
     @SerializedName("id") val id: Int,
     @SerializedName("firstName") val firstName: String,
     @SerializedName("lastName") val lastName: String
-): Parcelable
+) : Parcelable {
+    val fullName: String = "$firstName $lastName"
+}
