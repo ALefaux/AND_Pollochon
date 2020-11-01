@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Pollochon</string>
+
+    <string name="screen_list_polls_name">Polls</string>
 </resources>
