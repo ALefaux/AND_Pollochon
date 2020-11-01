@@ -4,7 +4,8 @@ buildscript {
     ext {
         activity_version = "1.1.0"
         kotlin_version = '1.4.10'
-        nav_version = "2.3.0"
+        nav_compose_version = "1.0.0-alpha01"
+        material_version = "1.2.1"
         koin_version = "2.1.5"
         hilt_version = "2.29.1-alpha"
         hilt_extensions_version = "1.0.0-alpha02"
