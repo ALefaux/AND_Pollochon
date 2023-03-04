@@ -1,9 +1,9 @@
 package fr.alefaux.pollochon.views.listpolls
 
 import androidx.compose.runtime.Composable
-import androidx.compose.foundation.Text
 import androidx.compose.foundation.layout.Column
-import androidx.ui.tooling.preview.Preview
+import androidx.compose.material3.Text
+import androidx.compose.ui.tooling.preview.Preview
 import fr.alefaux.pollochon.models.Poll
 import fr.alefaux.pollochon.models.User
 import java.util.*
@@ -21,7 +21,7 @@ fun ListPollsRow(poll: Poll) {
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 fun ListPollsRow_Preview() {
     ListPollsRow(
