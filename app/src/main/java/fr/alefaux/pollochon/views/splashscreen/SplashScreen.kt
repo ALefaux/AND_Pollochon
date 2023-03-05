@@ -25,8 +25,8 @@ fun SplashScreen() {
             modifier = Modifier
                 .fillMaxSize()
                 .then(
-                    Modifier.background(splashscreenBackgroundColor)
-                )
+                    Modifier.background(splashscreenBackgroundColor),
+                ),
         ) {
             Image(painterResource(R.drawable.ic_logo), contentDescription = null)
             Text(
@@ -34,8 +34,8 @@ fun SplashScreen() {
                 style = TextStyle(
                     color = Color.White,
                     fontSize = 30.sp,
-                    fontWeight = FontWeight.Bold
-                )
+                    fontWeight = FontWeight.Bold,
+                ),
             )
         }
     }

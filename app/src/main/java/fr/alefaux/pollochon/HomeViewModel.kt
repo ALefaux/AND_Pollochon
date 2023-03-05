@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-class HomeViewModel: ViewModel() {
+class HomeViewModel : ViewModel() {
     private val _uiState = MutableStateFlow<HomeUiState>(HomeUiState.Splash)
     val uiState: StateFlow<HomeUiState> = _uiState.asStateFlow()
 
@@ -21,7 +21,7 @@ class HomeViewModel: ViewModel() {
 }
 
 sealed class HomeUiState {
-    object Splash: HomeUiState()
-    object Login: HomeUiState()
-    object Home: HomeUiState()
+    object Splash : HomeUiState()
+    object Login : HomeUiState()
+    object Home : HomeUiState()
 }

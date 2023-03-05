@@ -19,14 +19,14 @@ import fr.alefaux.pollochon.views.Screen
 @Composable
 fun HomeContentScreen() {
     val items = listOf(
-        Screen.ListPolls
+        Screen.ListPolls,
     )
     val navController = rememberNavController()
     Scaffold(
         bottomBar = {
             NavigationBar {
-                //val navBackStackEntry by navController.currentBackStackEntryAsState()
-                //val currentRoute = navBackStackEntry?.arguments?.getString(KEY_ROUTE)
+                // val navBackStackEntry by navController.currentBackStackEntryAsState()
+                // val currentRoute = navBackStackEntry?.arguments?.getString(KEY_ROUTE)
                 items.forEach { screen ->
                     NavigationBarItem(
                         icon = { Icon(screen.icon, contentDescription = null) },
@@ -36,7 +36,7 @@ fun HomeContentScreen() {
                             // This is the equivalent to popUpTo the start destination
                             navController.popBackStack(
                                 navController.graph.startDestinationId,
-                                false
+                                false,
                             )
 
                             // This if check gives us a "singleTop" behavior where we do not create a
@@ -44,16 +44,16 @@ fun HomeContentScreen() {
                             /*if (currentRoute != screen.route) {
                                 navController.navigate(screen.route)
                             }*/
-                        }
+                        },
                     )
                 }
             }
-        }
+        },
     ) { padding ->
         NavHost(
             navController,
             modifier = Modifier.padding(padding),
-            startDestination = Screen.ListPolls.route
+            startDestination = Screen.ListPolls.route,
         ) {
             composable(Screen.ListPolls.route) { }
         }
