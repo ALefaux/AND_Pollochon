@@ -3,7 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
 }
 android {
-    namespace = "fr.alefaux.login"
+    namespace = "fr.alefaux.pollochon.feature.login"
     compileSdk = 33
 
     defaultConfig {

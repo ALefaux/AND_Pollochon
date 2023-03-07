@@ -14,6 +14,6 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name="Pollochon"
+rootProject.name = "Pollochon"
 include(":app")
-include(":login")
+include(":feature:login")
