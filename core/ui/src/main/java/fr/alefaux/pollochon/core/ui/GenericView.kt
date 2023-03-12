@@ -1,4 +1,4 @@
-package fr.alefaux.pollochon.views
+package fr.alefaux.pollochon.core.ui
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
@@ -8,8 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
-import fr.alefaux.pollochon.R
-import fr.alefaux.pollochon.theming.PollochonTheme
+import fr.alefaux.pollochon.core.designsystem.theme.PollochonTheme
 
 @Composable
 fun GenericView(modifier: Modifier = Modifier) {

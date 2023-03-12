@@ -1,7 +1,7 @@
-package fr.alefaux.pollochon.theming
+package fr.alefaux.pollochon.core.designsystem.theme
 
 import androidx.compose.ui.graphics.Color
-import fr.alefaux.pollochon.R
+import fr.alefaux.pollochon.core.designsystem.R
 
 val purple200 = Color(0xFFBB86FC)
 val purple500 = Color(0xFF6200EE)

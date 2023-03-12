@@ -1,26 +1,13 @@
 plugins {
-    id("com.android.application")
-    id("kotlin-android")
+    id("pollochon.android.application")
+    id("pollochon.android.application.compose")
+    id("pollochon.android.application.firebase")
     id("kotlin-parcelize")
-    id("kotlin-kapt")
 }
 
 android {
-    compileSdk = 33
-
-    compileOptions {
-        sourceCompatibility(JavaVersion.VERSION_11)
-        targetCompatibility(JavaVersion.VERSION_11)
-    }
-
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_11.toString()
-    }
-
     defaultConfig {
         applicationId = "fr.alefaux.pollochon"
-        minSdkVersion(23)
-        targetSdkVersion(33)
         versionCode = 1
         versionName = "1.0"
 
@@ -37,26 +24,19 @@ android {
         }
     }
 
-    buildFeatures {
-        viewBinding = true
-        compose = true
-    }
-
     composeOptions {
-        kotlinCompilerVersion = "1.4.0"
         kotlinCompilerExtensionVersion = "1.4.2"
     }
-    dynamicFeatures.addAll(mutableSetOf(":login"))
+
+    namespace = "fr.alefaux.pollochon"
 }
 
 dependencies {
-    implementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(platform(libs.androidx.compose.bom))
+    implementation(project(":core:ui"))
+    implementation(project(":core:designsystem"))
 
     implementation(libs.androidx.activity)
-    implementation(libs.androidx.core)
     implementation(libs.androidx.appcompat)
-    implementation(libs.material)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso)
@@ -78,17 +58,16 @@ dependencies {
     // Preference
     implementation(libs.androidx.preference)
 
-    // Compose
-    implementation(libs.androidx.compose.material)
-    implementation(libs.androidx.compose.tooling.preview)
-    debugImplementation(libs.androidx.compose.tooling)
-    androidTestImplementation(libs.androidx.compose.junit)
-    debugImplementation(libs.androidx.compose.ui.test)
-    implementation(libs.androidx.compose.runtime.livedata)
-
     // LiveData
     implementation(libs.androidx.lifecycle.runtime)
     implementation(libs.androidx.lifecycle.extensions)
     implementation(libs.androidx.lifecycle.viewmodel)
     implementation(libs.androidx.lifecycle.livedata)
+
+    // Firebase
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.auth)
+
+    // SplashScreen
+    implementation(libs.androidx.core.splashscreen)
 }

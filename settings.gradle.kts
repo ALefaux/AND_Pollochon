@@ -1,5 +1,5 @@
 pluginManagement {
-    // includeBuild("build-logic")
+    includeBuild("build-logic")
     repositories {
         google()
         mavenCentral()
@@ -14,6 +14,8 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "Pollochon"
+rootProject.name = "pollochon"
 include(":app")
 include(":feature:login")
+include(":core:ui")
+include(":core:designsystem")

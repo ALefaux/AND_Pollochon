@@ -1,4 +1,4 @@
-package fr.alefaux.pollochon.theming
+package fr.alefaux.pollochon.core.designsystem.theme
 
 import androidx.compose.material3.Typography
 

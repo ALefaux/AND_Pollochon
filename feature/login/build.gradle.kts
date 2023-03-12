@@ -1,6 +1,5 @@
 plugins {
-    id("com.android.dynamic-feature")
-    id("org.jetbrains.kotlin.android")
+    id("pollochon.android.library")
 }
 android {
     namespace = "fr.alefaux.pollochon.feature.login"

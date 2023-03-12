@@ -1,4 +1,4 @@
-package fr.alefaux.pollochon.views
+package fr.alefaux.pollochon.core.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
