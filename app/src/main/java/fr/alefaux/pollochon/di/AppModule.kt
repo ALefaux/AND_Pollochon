@@ -1,5 +1,6 @@
 package fr.alefaux.pollochon.di
 
+import fr.alefaux.login.LoginViewModel
 import fr.alefaux.pollochon.HomeViewModel
 import fr.alefaux.pollochon.repositories.PollRepository
 import fr.alefaux.pollochon.repositories.PollRepositoryImpl
@@ -19,4 +20,5 @@ val appModule = module {
 
     // ViewModels
     viewModelOf(::HomeViewModel)
+    viewModelOf(::LoginViewModel)
 }

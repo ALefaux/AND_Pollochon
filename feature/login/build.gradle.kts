@@ -1,31 +1,26 @@
 plugins {
-    id("pollochon.android.library")
+    id("pollochon.android.feature")
+    id("pollochon.android.library.compose")
 }
 android {
     namespace = "fr.alefaux.pollochon.feature.login"
-    compileSdk = 33
 
     defaultConfig {
-        minSdk = 23
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
         release {
             isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro",
-            )
         }
     }
-}
 
-dependencies {
-    implementation(project(":app"))
-    implementation(libs.androidx.core)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso)
-    androidTestImplementation(libs.androidx.annotation)
+    dependencies {
+        // Firebase
+        implementation(platform(libs.firebase.bom))
+        implementation(libs.firebase.auth)
+        implementation(libs.firebase.auth.google)
+
+        implementation(libs.kotlinx.coroutines.play.services)
+    }
 }

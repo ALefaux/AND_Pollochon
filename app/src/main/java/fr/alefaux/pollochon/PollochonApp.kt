@@ -1,10 +1,14 @@
 package fr.alefaux.pollochon
 
 import android.app.Application
+import fr.alefaux.pollochon.core.data.di.dataModule
+import fr.alefaux.pollochon.core.datastore.di.dataStoreModule
+import fr.alefaux.pollochon.core.domain.di.domainModule
 import fr.alefaux.pollochon.di.appModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
+import timber.log.Timber
 
 class PollochonApp : Application() {
     override fun onCreate() {
@@ -13,7 +17,20 @@ class PollochonApp : Application() {
         startKoin {
             androidLogger()
             androidContext(this@PollochonApp)
-            modules(listOf(appModule))
+            modules(
+                listOf(
+                    appModule,
+
+                    // Core
+                    domainModule,
+                    dataModule,
+                    dataStoreModule
+                )
+            )
+        }
+
+        if (BuildConfig.DEBUG) {
+            Timber.plant(Timber.DebugTree())
         }
     }
 }

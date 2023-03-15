@@ -28,6 +28,14 @@ gradlePlugin {
             id = "pollochon.android.application.firebase"
             implementationClass = "AndroidApplicationFirebaseConventionPlugin"
         }
+        register("androidFeature") {
+            id = "pollochon.android.feature"
+            implementationClass = "AndroidFeatureConventionPlugin"
+        }
+        register("androidKoin") {
+            id = "pollochon.android.koin"
+            implementationClass = "AndroidKoinConventionPlugin"
+        }
         register("androidLibrary") {
             id = "pollochon.android.library"
             implementationClass = "AndroidLibraryConventionPlugin"

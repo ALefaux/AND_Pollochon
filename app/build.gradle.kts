@@ -34,6 +34,11 @@ android {
 dependencies {
     implementation(project(":core:ui"))
     implementation(project(":core:designsystem"))
+    implementation(project(":core:domain"))
+    implementation(project(":core:data"))
+    implementation(project(":core:datastore"))
+
+    implementation(project(":feature:login"))
 
     implementation(libs.androidx.activity)
     implementation(libs.androidx.appcompat)
