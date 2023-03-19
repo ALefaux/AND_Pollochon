@@ -5,6 +5,7 @@ import fr.alefaux.pollochon.core.data.di.dataModule
 import fr.alefaux.pollochon.core.datastore.di.dataStoreModule
 import fr.alefaux.pollochon.core.domain.di.domainModule
 import fr.alefaux.pollochon.di.appModule
+import fr.alefaux.pollochon.feature.profile.di.profileModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -20,6 +21,9 @@ class PollochonApp : Application() {
             modules(
                 listOf(
                     appModule,
+
+                    // Feature
+                    profileModule,
 
                     // Core
                     domainModule,

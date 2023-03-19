@@ -22,4 +22,8 @@ dependencies {
     implementation(project(":core:data"))
 
     implementation(libs.kotlinx.coroutines.android)
+
+    // Firebase
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.auth)
 }
