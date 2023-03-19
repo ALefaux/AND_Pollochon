@@ -39,6 +39,7 @@ dependencies {
     implementation(project(":core:datastore"))
 
     implementation(project(":feature:login"))
+    implementation(project(":feature:profile"))
 
     implementation(libs.androidx.activity)
     implementation(libs.androidx.appcompat)
