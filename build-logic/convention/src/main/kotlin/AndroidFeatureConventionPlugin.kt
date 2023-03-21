@@ -19,6 +19,7 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
                 add("implementation", project(":core:ui"))
                 add("implementation", project(":core:designsystem"))
                 add("implementation", project(":core:domain"))
+                add("implementation", project(":core:model"))
 
                 add("implementation", libs.findLibrary("timber").get())
                 add("implementation", libs.findLibrary("androidx.lifecycle.viewModelCompose").get())

@@ -25,4 +25,6 @@ dependencies {
     implementation(libs.androidx.compose.tooling.preview)
     debugImplementation(libs.androidx.compose.tooling)
     implementation(libs.androidx.compose.runtime.livedata)
+
+    api(libs.coil.compose)
 }
