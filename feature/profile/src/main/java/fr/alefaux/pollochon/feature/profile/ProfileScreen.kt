@@ -1,32 +1,34 @@
 package fr.alefaux.pollochon.feature.profile
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
+import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.tooling.preview.Preview
+import fr.alefaux.pollochon.core.designsystem.theme.PollochonTheme
+import fr.alefaux.pollochon.core.ui.LoadingScreen
+import fr.alefaux.pollochon.feature.profile.component.ProfileContentView
+import fr.alefaux.pollochon.feature.profile.model.ProfileState
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun ProfileScreen(
     viewModel: ProfileViewModel = koinViewModel()
 ) {
-    Column(
-        modifier = Modifier.fillMaxWidth().padding(16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Spacer(modifier = Modifier.weight(1f))
-        Button(
-            onClick = {
-                viewModel.logout()
-            }
+    when (val state = viewModel.uiState.collectAsState().value) {
+        is ProfileState.Loading -> LoadingScreen()
+        is ProfileState.Loaded -> ProfileContentView(
+            profileUi = state.profileUi
         ) {
-            Text("Déconnexion")
+            viewModel.logout()
         }
+        is ProfileState.Error -> Text("Error")
+    }
+}
+
+@Composable
+@Preview(showBackground = true)
+fun ProfilePreview() {
+    PollochonTheme {
+        ProfileScreen()
     }
 }
