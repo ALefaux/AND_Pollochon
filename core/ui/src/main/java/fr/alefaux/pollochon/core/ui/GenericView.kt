@@ -25,11 +25,13 @@ object GenericView {
         )
 
     @Composable
-    fun Error(modifier: Modifier = Modifier) =
-        GenericViewImpl(
-            modifier = modifier,
-            text = "Oups ... Something went wrong ... Please try again."
-        )
+    fun Error(
+        modifier: Modifier = Modifier,
+        message: String = "Oups ... Something went wrong ... Please try again."
+    ) = GenericViewImpl(
+        modifier = modifier,
+        text = message
+    )
 
     @Composable
     internal fun GenericViewImpl(
