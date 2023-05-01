@@ -3,6 +3,7 @@ package fr.alefaux.pollochon
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
@@ -16,6 +17,7 @@ class HomeActivity : ComponentActivity() {
 
     private val homeViewModel: HomeViewModel by viewModel()
 
+    @ExperimentalMaterialApi
     override fun onCreate(savedInstanceState: Bundle?) {
         val splashScreen = installSplashScreen()
         super.onCreate(savedInstanceState)
@@ -30,9 +32,10 @@ class HomeActivity : ComponentActivity() {
             }
 
             PollochonTheme {
-                when (homeViewModel.uiState.collectAsState().value) {
+                when (val state = homeViewModel.uiState.collectAsState().value) {
                     is HomeUiState.Home -> HomeContentScreen()
                     is HomeUiState.Login -> LoginScreen()
+                    is HomeUiState.Error -> GenericView.Error(message = state.message)
                     else -> GenericView.Error()
                 }
             }

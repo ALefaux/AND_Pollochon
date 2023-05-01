@@ -22,4 +22,8 @@ class SettingsRepositoryImpl(
                 User(userName, userImageUrl)
             }
     }
+
+    override suspend fun setUserName(userName: String) {
+        settingsDataStore.setUserName(userName)
+    }
 }

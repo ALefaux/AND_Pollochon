@@ -4,6 +4,7 @@ import android.app.Application
 import fr.alefaux.pollochon.core.data.di.dataModule
 import fr.alefaux.pollochon.core.datastore.di.dataStoreModule
 import fr.alefaux.pollochon.core.domain.di.domainModule
+import fr.alefaux.pollochon.core.network.di.networkModule
 import fr.alefaux.pollochon.di.appModule
 import fr.alefaux.pollochon.feature.profile.di.profileModule
 import org.koin.android.ext.koin.androidContext
@@ -28,7 +29,8 @@ class PollochonApp : Application() {
                     // Core
                     domainModule,
                     dataModule,
-                    dataStoreModule
+                    dataStoreModule,
+                    networkModule
                 )
             )
         }

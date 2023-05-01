@@ -5,6 +5,8 @@ import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import fr.alefaux.pollochon.core.data.repository.SettingsRepository
+import fr.alefaux.pollochon.core.domain.hello.SayHelloUseCase
+import fr.alefaux.pollochon.core.model.DataResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
@@ -12,12 +14,12 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 class HomeViewModel(
-    private val settingsRepository: SettingsRepository
+    private val settingsRepository: SettingsRepository,
+    private val sayHelloUseCase: SayHelloUseCase
 ) : ViewModel() {
     private val _uiState = MutableStateFlow<HomeUiState>(HomeUiState.Loading)
     val uiState: StateFlow<HomeUiState> = _uiState.asStateFlow()
@@ -32,6 +34,11 @@ class HomeViewModel(
                         HomeUiState.Home
                     } else {
                         HomeUiState.Login
+                    }
+                },
+                async(Dispatchers.IO) {
+                    if (sayHelloUseCase.invoke() == DataResponse.Error) {
+                        newState = HomeUiState.Error("Une erreur est survenue lors du reveil du server")
                     }
                 }
             )
@@ -57,4 +64,5 @@ sealed class HomeUiState {
     object Loading : HomeUiState()
     object Login : HomeUiState()
     object Home : HomeUiState()
+    class Error(val message: String) : HomeUiState()
 }
