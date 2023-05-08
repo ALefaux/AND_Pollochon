@@ -2,7 +2,7 @@ package fr.alefaux.pollochon.core.data.repository.login
 
 import fr.alefaux.pollochon.core.data.repository.SettingsRepository
 import fr.alefaux.pollochon.core.model.DataResponse
-import fr.alefaux.pollochon.core.model.User
+import fr.alefaux.pollochon.core.model.user.User
 import fr.alefaux.pollochon.core.network.LoginNetworkDataSource
 
 class LoginRepositoryImpl(

@@ -1,6 +1,6 @@
 package fr.alefaux.pollochon.core.data.repository
 
-import fr.alefaux.pollochon.core.model.User
+import fr.alefaux.pollochon.core.model.user.User
 import kotlinx.coroutines.flow.Flow
 
 interface SettingsRepository {

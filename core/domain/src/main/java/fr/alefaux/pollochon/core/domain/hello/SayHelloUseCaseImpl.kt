@@ -6,7 +6,7 @@ import fr.alefaux.pollochon.core.model.DataResponse
 class SayHelloUseCaseImpl(
     private val helloRepository: HelloRepository
 ) : SayHelloUseCase {
-    override suspend fun invoke(): DataResponse<Nothing> {
+    override suspend fun invoke(): DataResponse<Unit> {
         return helloRepository.sayHello()
     }
 }

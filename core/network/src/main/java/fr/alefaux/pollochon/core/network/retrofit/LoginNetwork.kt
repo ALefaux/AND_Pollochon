@@ -1,7 +1,7 @@
 package fr.alefaux.pollochon.core.network.retrofit
 
 import fr.alefaux.pollochon.core.model.DataResponse
-import fr.alefaux.pollochon.core.model.User
+import fr.alefaux.pollochon.core.model.user.User
 import fr.alefaux.pollochon.core.network.LoginNetworkDataSource
 import fr.alefaux.pollochon.core.network.model.CreateUser
 import fr.alefaux.pollochon.core.network.model.UserApi

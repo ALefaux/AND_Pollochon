@@ -1,7 +1,7 @@
 package fr.alefaux.pollochon.core.model
 
 sealed class DataResponse<out T : Any> {
-    object Success : DataResponse<Nothing>()
+    data class Success<out T : Any>(val data: T) : DataResponse<T>()
     object Created : DataResponse<Nothing>()
     data class Found<out T : Any>(val data: T) : DataResponse<T>()
     object BadRequest : DataResponse<Nothing>()
