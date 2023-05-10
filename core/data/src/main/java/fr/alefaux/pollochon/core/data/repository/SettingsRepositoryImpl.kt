@@ -17,10 +17,17 @@ class SettingsRepositoryImpl(
     }
 
     override fun getUser(): Flow<User> {
-        return settingsDataStore.getUserName()
-            .zip(settingsDataStore.getUserImageUrl()) { userName, userImageUrl ->
-                User(userName, userImageUrl)
+        return settingsDataStore.getUserId()
+            .zip(settingsDataStore.getUserName()) { userId, userName ->
+                Pair(userId, userName)
             }
+            .zip(settingsDataStore.getUserImageUrl()) { idAndPseudo, userImageUrl ->
+                User(idAndPseudo.first, idAndPseudo.second, userImageUrl)
+            }
+    }
+
+    override suspend fun setUserId(userId: Int) {
+        settingsDataStore.setUserId(userId)
     }
 
     override suspend fun setUserName(userName: String) {

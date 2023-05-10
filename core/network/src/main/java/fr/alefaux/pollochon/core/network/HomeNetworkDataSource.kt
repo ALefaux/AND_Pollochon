@@ -4,5 +4,5 @@ import fr.alefaux.pollochon.core.model.DataResponse
 import fr.alefaux.pollochon.core.model.survey.HomeSurvey
 
 interface HomeNetworkDataSource {
-    suspend fun getHomeData(userId: String): DataResponse<HomeSurvey>
+    suspend fun getHomeData(userId: Int): DataResponse<HomeSurvey>
 }

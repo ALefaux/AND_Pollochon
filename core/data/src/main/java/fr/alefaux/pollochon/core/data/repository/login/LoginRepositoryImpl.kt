@@ -12,6 +12,7 @@ class LoginRepositoryImpl(
     override suspend fun checkUserExists(firebaseId: String): DataResponse<User> {
         return loginNetworkDataSource.checkUserExists(firebaseId).also { response ->
             if (response is DataResponse.Found) {
+                settingsRepository.setUserId(response.data.id)
                 settingsRepository.setUserName(response.data.userName)
             }
         }
@@ -20,7 +21,12 @@ class LoginRepositoryImpl(
     override suspend fun registerUserName(
         firebaseId: String,
         userName: String
-    ): DataResponse<Nothing> {
-        return loginNetworkDataSource.createUser(firebaseId, userName)
+    ): DataResponse<User> {
+        return loginNetworkDataSource.createUser(firebaseId, userName).also { response ->
+            if (response is DataResponse.Found) {
+                settingsRepository.setUserId(response.data.id)
+                settingsRepository.setUserName(response.data.userName)
+            }
+        }
     }
 }

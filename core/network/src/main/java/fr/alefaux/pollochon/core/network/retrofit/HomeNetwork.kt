@@ -12,7 +12,7 @@ import retrofit2.http.Header
 private interface HomeService {
     @GET("/home")
     suspend fun getHomeSurveys(
-        @Header("userId") userId: String
+        @Header("userId") userId: Int
     ): Response<HomeSurveyApi>
 }
 
@@ -22,18 +22,19 @@ class HomeNetwork(
 
     private val networkApi = retrofit.create(HomeService::class.java)
 
-    override suspend fun getHomeData(userId: String): DataResponse<HomeSurvey> {
+    override suspend fun getHomeData(userId: Int): DataResponse<HomeSurvey> {
         val response = networkApi.getHomeSurveys(userId)
         return when (response.code()) {
             200 -> {
                 val data = response.body()
 
-                return if(data != null) {
+                return if (data != null) {
                     DataResponse.Success(data.toHomeSurvey())
                 } else {
                     DataResponse.Unknown
                 }
             }
+
             404 -> DataResponse.NotFound
             else -> DataResponse.Unknown
         }

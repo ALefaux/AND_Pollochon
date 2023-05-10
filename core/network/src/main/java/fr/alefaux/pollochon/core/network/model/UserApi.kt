@@ -10,6 +10,7 @@ data class UserApi(
 ) {
     fun toUser(): User {
         return User(
+            id = id,
             userName = pseudo,
             userImageUrl = null
         )
