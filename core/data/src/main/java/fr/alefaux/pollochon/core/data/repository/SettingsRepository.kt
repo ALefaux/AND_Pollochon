@@ -7,6 +7,7 @@ interface SettingsRepository {
     fun userIsConnected(): Flow<Boolean>
     suspend fun setUserIsConnected(isConnected: Boolean)
 
+    fun getUserId(): Flow<Int>
     fun getUser(): Flow<User>
     suspend fun setUserId(userId: Int)
     suspend fun setUserName(userName: String)

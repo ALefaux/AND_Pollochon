@@ -16,6 +16,10 @@ class SettingsRepositoryImpl(
         settingsDataStore.setUserIsLogged(isConnected)
     }
 
+    override fun getUserId(): Flow<Int> {
+        return settingsDataStore.getUserId()
+    }
+
     override fun getUser(): Flow<User> {
         return settingsDataStore.getUserId()
             .zip(settingsDataStore.getUserName()) { userId, userName ->

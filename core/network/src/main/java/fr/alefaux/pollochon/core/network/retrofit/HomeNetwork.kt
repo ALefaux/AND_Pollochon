@@ -1,7 +1,7 @@
 package fr.alefaux.pollochon.core.network.retrofit
 
 import fr.alefaux.pollochon.core.model.DataResponse
-import fr.alefaux.pollochon.core.model.survey.HomeSurvey
+import fr.alefaux.pollochon.core.model.survey.HomeSurveys
 import fr.alefaux.pollochon.core.network.HomeNetworkDataSource
 import fr.alefaux.pollochon.core.network.model.HomeSurveyApi
 import retrofit2.Response
@@ -22,7 +22,7 @@ class HomeNetwork(
 
     private val networkApi = retrofit.create(HomeService::class.java)
 
-    override suspend fun getHomeData(userId: Int): DataResponse<HomeSurvey> {
+    override suspend fun getHomeData(userId: Int): DataResponse<HomeSurveys> {
         val response = networkApi.getHomeSurveys(userId)
         return when (response.code()) {
             200 -> {

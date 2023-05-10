@@ -1,6 +1,6 @@
 package fr.alefaux.pollochon.core.network.model
 
-import fr.alefaux.pollochon.core.model.survey.HomeSurvey
+import fr.alefaux.pollochon.core.model.survey.HomeSurveys
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -9,8 +9,8 @@ data class HomeSurveyApi(
     val participatedSurveys: List<SurveyApi>,
     val invitedSurveys: List<SurveyApi>
 ) {
-    fun toHomeSurvey(): HomeSurvey {
-        return HomeSurvey(
+    fun toHomeSurvey(): HomeSurveys {
+        return HomeSurveys(
             ownSurveys = ownSurveys.map { it.toSurvey() },
             participatedSurveys = participatedSurveys.map { it.toSurvey() },
             invitedSurveys = invitedSurveys.map { it.toSurvey() }
