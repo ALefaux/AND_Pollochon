@@ -1,6 +1,6 @@
 package fr.alefaux.pollochon.core.network.model
 
-import fr.alefaux.pollochon.core.model.User
+import fr.alefaux.pollochon.core.model.user.User
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -10,6 +10,7 @@ data class UserApi(
 ) {
     fun toUser(): User {
         return User(
+            id = id,
             userName = pseudo,
             userImageUrl = null
         )

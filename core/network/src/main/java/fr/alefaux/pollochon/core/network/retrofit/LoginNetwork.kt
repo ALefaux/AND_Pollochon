@@ -1,7 +1,7 @@
 package fr.alefaux.pollochon.core.network.retrofit
 
 import fr.alefaux.pollochon.core.model.DataResponse
-import fr.alefaux.pollochon.core.model.User
+import fr.alefaux.pollochon.core.model.user.User
 import fr.alefaux.pollochon.core.network.LoginNetworkDataSource
 import fr.alefaux.pollochon.core.network.model.CreateUser
 import fr.alefaux.pollochon.core.network.model.UserApi
@@ -21,7 +21,7 @@ private interface LoginService {
     @POST("/users ")
     suspend fun createUser(
         @Body createUser: CreateUser
-    ): Response<Unit>
+    ): Response<UserApi>
 }
 
 class LoginNetwork(
@@ -48,11 +48,21 @@ class LoginNetwork(
         }
     }
 
-    override suspend fun createUser(firebaseId: String, pseudo: String): DataResponse<Nothing> {
+    override suspend fun createUser(firebaseId: String, pseudo: String): DataResponse<User> {
         val createUser = CreateUser(pseudo, firebaseId)
+        val response = networkApi.createUser(createUser)
 
-        return when (networkApi.createUser(createUser).code()) {
-            201 -> DataResponse.Created
+        return when (response.code()) {
+            201 -> {
+                val data = response.body()
+
+                return if (data != null) {
+                    DataResponse.Success(data.toUser())
+                } else {
+                    DataResponse.Unknown
+                }
+            }
+
             400 -> DataResponse.BadRequest
             409 -> DataResponse.Conflict
             else -> DataResponse.Unknown

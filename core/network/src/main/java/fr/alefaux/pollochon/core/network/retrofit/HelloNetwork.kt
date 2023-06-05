@@ -16,9 +16,9 @@ class HelloNetwork(
 ) : HelloNetworkDataSource {
     private val networkApi = retrofit.create(HelloService::class.java)
 
-    override suspend fun sayHello(): DataResponse<Nothing> {
+    override suspend fun sayHello(): DataResponse<Unit> {
         return if (networkApi.sayHello().isSuccessful) {
-            DataResponse.Success
+            DataResponse.Success(Unit)
         } else {
             DataResponse.Error
         }

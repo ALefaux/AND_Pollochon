@@ -25,7 +25,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.2"
+        kotlinCompilerExtensionVersion = libs.versions.androidxComposeCompiler.get()
     }
 
     namespace = "fr.alefaux.pollochon"
@@ -40,6 +40,7 @@ dependencies {
     implementation(project(":core:datastore"))
     implementation(project(":core:network"))
 
+    implementation(project(":feature:home"))
     implementation(project(":feature:login"))
     implementation(project(":feature:profile"))
 

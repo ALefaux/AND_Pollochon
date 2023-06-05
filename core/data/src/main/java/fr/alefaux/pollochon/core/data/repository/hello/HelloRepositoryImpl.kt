@@ -6,7 +6,7 @@ import fr.alefaux.pollochon.core.network.HelloNetworkDataSource
 class HelloRepositoryImpl(
     private val helloNetworkDataSource: HelloNetworkDataSource
 ) : HelloRepository {
-    override suspend fun sayHello(): DataResponse<Nothing> {
+    override suspend fun sayHello(): DataResponse<Unit> {
         return helloNetworkDataSource.sayHello()
     }
 }

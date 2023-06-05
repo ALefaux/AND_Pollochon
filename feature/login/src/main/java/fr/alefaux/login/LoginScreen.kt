@@ -98,7 +98,8 @@ fun LoginScreen(
         sheetState = sheetState,
         sheetContent = {
             FirstConnectionScreen(
-                isPseudoInError = viewModel.pseudoErrorFlow.collectAsState(initial = false).value
+                isCreatingUserName = viewModel.creatingUserNameFlow.collectAsState(initial = false).value,
+                pseudoErrorMessage = viewModel.pseudoErrorFlow.collectAsState(initial = "").value
             ) {
                 viewModel.registerUserName(it)
             }

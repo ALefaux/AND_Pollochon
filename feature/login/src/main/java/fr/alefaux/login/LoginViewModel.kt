@@ -18,16 +18,17 @@ class LoginViewModel(
 
     private val _noUserNameFlow = MutableSharedFlow<Unit>()
     val noUserNameFlow: SharedFlow<Unit> = _noUserNameFlow
-    private val _pseudoErrorFlow = MutableSharedFlow<Boolean>()
-    val pseudoErrorFlow: SharedFlow<Boolean> = _pseudoErrorFlow
+    private val _pseudoErrorFlow = MutableSharedFlow<String>()
+    val pseudoErrorFlow: SharedFlow<String> = _pseudoErrorFlow
     private val _createUserErrorFlow = MutableSharedFlow<Boolean>()
     val createUserErrorFlow: SharedFlow<Boolean> = _createUserErrorFlow
+    private val _creatingUserNameFlow = MutableSharedFlow<Boolean>()
+    val creatingUserNameFlow: SharedFlow<Boolean> = _creatingUserNameFlow
 
     fun onUserSuccessToLogin(firebaseId: String) {
         viewModelScope.launch {
-            val result = checkUserExistsUseCase.invoke(firebaseId)
-            when (result) {
-                is DataResponse.Found -> setIsConnectedUseCase.setUserIsConnected(true)
+            when (checkUserExistsUseCase.invoke(firebaseId)) {
+                is DataResponse.Found -> setUserIsConnected()
                 DataResponse.NotFound -> _noUserNameFlow.emit(Unit)
                 else -> {}
             }
@@ -36,12 +37,38 @@ class LoginViewModel(
 
     fun registerUserName(username: String) {
         viewModelScope.launch {
+            if (username.isEmpty()) {
+                _pseudoErrorFlow.emit("Le pseudo ne peut pas être vide")
+                return@launch
+            }
+
+            _creatingUserNameFlow.emit(true)
+            _pseudoErrorFlow.emit("")
+
             when (registerUserNameUseCase.invoke(username)) {
-                DataResponse.Created -> setIsConnectedUseCase.setUserIsConnected(true)
-                DataResponse.BadRequest -> _createUserErrorFlow.emit(true)
-                DataResponse.Conflict -> _pseudoErrorFlow.emit(true)
-                else -> {}
+                is DataResponse.Success -> {
+                    _creatingUserNameFlow.emit(false)
+                    setUserIsConnected()
+                }
+
+                DataResponse.BadRequest -> {
+                    _creatingUserNameFlow.emit(false)
+                    _createUserErrorFlow.emit(true)
+                }
+
+                DataResponse.Conflict -> {
+                    _creatingUserNameFlow.emit(false)
+                    _pseudoErrorFlow.emit("Le pseudo est déjà utilisé")
+                }
+
+                else -> {
+                    _creatingUserNameFlow.emit(false)
+                }
             }
         }
+    }
+
+    private suspend fun setUserIsConnected() {
+        setIsConnectedUseCase.setUserIsConnected(true)
     }
 }

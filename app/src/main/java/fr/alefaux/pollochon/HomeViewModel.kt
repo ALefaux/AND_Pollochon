@@ -14,6 +14,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
@@ -30,7 +31,7 @@ class HomeViewModel(
             val tasks = listOf(
                 async(Dispatchers.IO) { delay(3000) },
                 async(Dispatchers.IO) {
-                    newState = if (Firebase.auth.currentUser != null) {
+                    newState = if (checkUserIsLogged()) {
                         HomeUiState.Home
                     } else {
                         HomeUiState.Login
@@ -45,6 +46,10 @@ class HomeViewModel(
             tasks.awaitAll()
             _uiState.value = newState
         }
+    }
+
+    private suspend fun checkUserIsLogged(): Boolean {
+        return Firebase.auth.currentUser != null && settingsRepository.containsUserIsLogged().first()
     }
 
     fun listenUserIdConnected() {

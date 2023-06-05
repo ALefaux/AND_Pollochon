@@ -1,7 +1,7 @@
 package fr.alefaux.pollochon.core.domain.login
 
 import fr.alefaux.pollochon.core.model.DataResponse
-import fr.alefaux.pollochon.core.model.User
+import fr.alefaux.pollochon.core.model.user.User
 
 interface CheckUserExistsUseCase {
     suspend fun invoke(firebaseId: String): DataResponse<User>

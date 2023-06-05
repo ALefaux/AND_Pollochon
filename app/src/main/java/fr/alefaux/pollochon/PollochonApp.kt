@@ -1,11 +1,13 @@
 package fr.alefaux.pollochon
 
 import android.app.Application
+import fr.alefaux.login.di.loginModule
 import fr.alefaux.pollochon.core.data.di.dataModule
 import fr.alefaux.pollochon.core.datastore.di.dataStoreModule
 import fr.alefaux.pollochon.core.domain.di.domainModule
 import fr.alefaux.pollochon.core.network.di.networkModule
 import fr.alefaux.pollochon.di.appModule
+import fr.alefaux.pollochon.feature.home.di.featureHomeModule
 import fr.alefaux.pollochon.feature.profile.di.profileModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -24,6 +26,8 @@ class PollochonApp : Application() {
                     appModule,
 
                     // Feature
+                    loginModule,
+                    featureHomeModule,
                     profileModule,
 
                     // Core

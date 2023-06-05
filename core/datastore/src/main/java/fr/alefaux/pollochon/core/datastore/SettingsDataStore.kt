@@ -5,6 +5,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.Flow
@@ -21,9 +22,27 @@ class SettingsDataStore(
         }
     }
 
+    fun containsUserIsLogged(): Flow<Boolean> {
+        return context.settingsDataStore.data.map { value ->
+            value.contains(userIsLogged)
+        }
+    }
+
     suspend fun setUserIsLogged(isLogged: Boolean) {
         context.settingsDataStore.edit { settings ->
             settings[userIsLogged] = isLogged
+        }
+    }
+
+    fun getUserId(): Flow<Int> {
+        return context.settingsDataStore.data.mapNotNull { value ->
+            value[userId]
+        }
+    }
+
+    suspend fun setUserId(id: Int) {
+        context.settingsDataStore.edit { settings ->
+            settings[userId] = id
         }
     }
 
@@ -53,6 +72,7 @@ class SettingsDataStore(
 
     companion object {
         private val userIsLogged = booleanPreferencesKey("user_is_logged")
+        private val userId = intPreferencesKey("user_id")
         private val userName = stringPreferencesKey("user_name")
         private val userImageUrl = stringPreferencesKey("user_image_url")
     }
