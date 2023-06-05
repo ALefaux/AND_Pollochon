@@ -12,6 +12,10 @@ class SettingsRepositoryImpl(
         return settingsDataStore.userIsLogged()
     }
 
+    override fun containsUserIsLogged(): Flow<Boolean> {
+        return settingsDataStore.containsUserIsLogged()
+    }
+
     override suspend fun setUserIsConnected(isConnected: Boolean) {
         settingsDataStore.setUserIsLogged(isConnected)
     }

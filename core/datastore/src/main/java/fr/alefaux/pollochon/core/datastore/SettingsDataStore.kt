@@ -22,6 +22,12 @@ class SettingsDataStore(
         }
     }
 
+    fun containsUserIsLogged(): Flow<Boolean> {
+        return context.settingsDataStore.data.map { value ->
+            value.contains(userIsLogged)
+        }
+    }
+
     suspend fun setUserIsLogged(isLogged: Boolean) {
         context.settingsDataStore.edit { settings ->
             settings[userIsLogged] = isLogged

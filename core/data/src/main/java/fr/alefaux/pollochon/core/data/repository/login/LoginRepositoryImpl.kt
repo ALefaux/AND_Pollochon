@@ -26,6 +26,9 @@ class LoginRepositoryImpl(
             if (response is DataResponse.Found) {
                 settingsRepository.setUserId(response.data.id)
                 settingsRepository.setUserName(response.data.userName)
+            } else if (response is DataResponse.Success) {
+                settingsRepository.setUserId(response.data.id)
+                settingsRepository.setUserName(response.data.userName)
             }
         }
     }

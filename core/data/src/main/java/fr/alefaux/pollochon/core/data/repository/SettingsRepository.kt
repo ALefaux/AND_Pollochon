@@ -5,6 +5,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface SettingsRepository {
     fun userIsConnected(): Flow<Boolean>
+    fun containsUserIsLogged(): Flow<Boolean>
     suspend fun setUserIsConnected(isConnected: Boolean)
 
     fun getUserId(): Flow<Int>

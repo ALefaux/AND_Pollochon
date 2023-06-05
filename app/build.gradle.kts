@@ -40,6 +40,7 @@ dependencies {
     implementation(project(":core:datastore"))
     implementation(project(":core:network"))
 
+    implementation(project(":feature:home"))
     implementation(project(":feature:login"))
     implementation(project(":feature:profile"))
 
