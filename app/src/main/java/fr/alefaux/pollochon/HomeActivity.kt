@@ -10,7 +10,7 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import fr.alefaux.login.LoginScreen
 import fr.alefaux.pollochon.core.designsystem.theme.PollochonTheme
 import fr.alefaux.pollochon.core.ui.GenericView
-import fr.alefaux.pollochon.feature.home.HomeScreen
+import fr.alefaux.pollochon.navigation.NavigationComponent
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeActivity : ComponentActivity() {
@@ -33,7 +33,7 @@ class HomeActivity : ComponentActivity() {
 
             PollochonTheme {
                 when (val state = homeViewModel.uiState.collectAsState().value) {
-                    is HomeUiState.Home -> HomeScreen()
+                    is HomeUiState.Logged -> NavigationComponent()
                     is HomeUiState.Login -> LoginScreen()
                     is HomeUiState.Error -> GenericView.Error(message = state.message)
                     else -> GenericView.Error()

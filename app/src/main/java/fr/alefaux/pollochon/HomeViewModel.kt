@@ -32,7 +32,7 @@ class HomeViewModel(
                 async(Dispatchers.IO) { delay(3000) },
                 async(Dispatchers.IO) {
                     newState = if (checkUserIsLogged()) {
-                        HomeUiState.Home
+                        HomeUiState.Logged
                     } else {
                         HomeUiState.Login
                     }
@@ -56,7 +56,7 @@ class HomeViewModel(
         viewModelScope.launch {
             settingsRepository.userIsConnected().collect { isConnected ->
                 _uiState.value = if (isConnected) {
-                    HomeUiState.Home
+                    HomeUiState.Logged
                 } else {
                     HomeUiState.Login
                 }
@@ -68,6 +68,6 @@ class HomeViewModel(
 sealed class HomeUiState {
     object Loading : HomeUiState()
     object Login : HomeUiState()
-    object Home : HomeUiState()
+    object Logged : HomeUiState()
     class Error(val message: String) : HomeUiState()
 }
