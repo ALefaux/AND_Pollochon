@@ -3,5 +3,6 @@
 
     <string name="screen_list_polls_name">Polls</string>
     <string name="screen_profile_name">Profile</string>
+    <string name="screen_home_name">Accueil</string>
     <string name="title_login">Login</string>
 </resources>
