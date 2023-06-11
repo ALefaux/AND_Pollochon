@@ -12,7 +12,7 @@ jobs:
 
     steps:
       - name: open-pull-request-action
-        uses: vsoch/pull-request-action@1.0.6
+        uses: peter-evans/create-pull-request@v5
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PULL_REQUEST_BRANCH: "master"
