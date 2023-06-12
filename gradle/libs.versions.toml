@@ -1,7 +1,7 @@
 [versions]
 androidxComposeCompiler = "1.4.6"
 androidxLifecycle = "2.6.1"
-gradleplugin = "8.0.0"
+gradleplugin = "8.0.2"
 kotlin = "1.8.20"
 ksp = "1.8.0-1.0.9"
 okhttp = "4.10.0"
