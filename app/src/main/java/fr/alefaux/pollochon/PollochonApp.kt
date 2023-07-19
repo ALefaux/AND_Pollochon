@@ -9,6 +9,7 @@ import fr.alefaux.pollochon.core.network.di.networkModule
 import fr.alefaux.pollochon.di.appModule
 import fr.alefaux.pollochon.feature.home.di.featureHomeModule
 import fr.alefaux.pollochon.feature.profile.di.profileModule
+import fr.alefaux.pollochon.feature.survey.create.di.createSurveyModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -29,6 +30,7 @@ class PollochonApp : Application() {
                     loginModule,
                     featureHomeModule,
                     profileModule,
+                    createSurveyModule,
 
                     // Core
                     domainModule,

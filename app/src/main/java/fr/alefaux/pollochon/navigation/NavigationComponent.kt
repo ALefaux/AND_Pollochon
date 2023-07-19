@@ -19,6 +19,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import fr.alefaux.pollochon.feature.home.HomeScreen
+import fr.alefaux.pollochon.feature.survey.create.CreateSurveyScreen
 import fr.alefaux.pollochon.model.Screen
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -27,6 +28,7 @@ fun NavigationComponent() {
     val navController = rememberNavController()
     val items = listOf(
         Screen.Home,
+        Screen.CreateSurvey,
     )
     Scaffold(
         bottomBar = {
@@ -64,6 +66,7 @@ fun NavigationComponent() {
             Modifier.padding(innerPadding)
         ) {
             composable(Screen.Home.route) { HomeScreen() }
+            composable(Screen.CreateSurvey.route) { CreateSurveyScreen() }
         }
     }
 }

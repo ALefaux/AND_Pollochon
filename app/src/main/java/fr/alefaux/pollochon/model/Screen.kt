@@ -10,4 +10,5 @@ sealed class Screen(
     @DrawableRes val iconId: Int
 ) {
     object Home : Screen("home", R.string.screen_home_name, R.drawable.ic_home)
+    object CreateSurvey : Screen("survey/create", R.string.screen_create_survey, R.drawable.ic_add)
 }
