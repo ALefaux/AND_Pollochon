@@ -1,7 +1,7 @@
 plugins {
     id("pollochon.android.library")
     id("pollochon.android.koin")
-    kotlin("plugin.serialization") version "1.8.10"
+    id("kotlinx-serialization")
 }
 
 android {

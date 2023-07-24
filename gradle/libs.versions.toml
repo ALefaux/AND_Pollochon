@@ -67,3 +67,4 @@ com-google-android-material-material = { group = "com.google.android.material", 
 [plugins]
 android-dynamic-features = { id = "com.android.dynamic-feature", version.ref = "gradleplugin" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }

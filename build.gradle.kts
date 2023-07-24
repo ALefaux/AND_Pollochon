@@ -15,3 +15,7 @@ buildscript {
 tasks.register("clean", Delete::class) {
     delete(rootProject.buildDir)
 }
+
+plugins {
+    alias(libs.plugins.kotlin.serialization) apply false
+}
