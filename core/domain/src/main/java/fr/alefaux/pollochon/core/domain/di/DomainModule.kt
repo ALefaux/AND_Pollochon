@@ -11,6 +11,8 @@ import fr.alefaux.pollochon.core.domain.login.CheckUserExistsUseCase
 import fr.alefaux.pollochon.core.domain.login.CheckUserExistsUseCaseImpl
 import fr.alefaux.pollochon.core.domain.login.RegisterUserNameUseCase
 import fr.alefaux.pollochon.core.domain.login.RegisterUserNameUseCaseImpl
+import fr.alefaux.pollochon.core.domain.poll.CreatePollUseCase
+import fr.alefaux.pollochon.core.domain.poll.CreatePollUseCaseImpl
 import org.koin.core.module.dsl.factoryOf
 import org.koin.dsl.module
 
@@ -28,4 +30,7 @@ val domainModule = module {
 
     // Home
     factory<GetHomeSurveysUseCase> { GetHomeSurveysUseCaseImpl(get(), get()) }
+
+    // Poll
+    factory<CreatePollUseCase> { CreatePollUseCaseImpl(get(), get()) }
 }

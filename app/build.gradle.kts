@@ -43,6 +43,7 @@ dependencies {
     implementation(project(":feature:home"))
     implementation(project(":feature:login"))
     implementation(project(":feature:profile"))
+    implementation(project(":feature:survey:create"))
 
     implementation(libs.androidx.activity)
     implementation(libs.androidx.appcompat)
