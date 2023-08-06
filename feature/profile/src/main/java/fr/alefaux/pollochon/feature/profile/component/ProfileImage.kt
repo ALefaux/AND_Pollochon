@@ -20,7 +20,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import fr.alefaux.pollochon.feature.profile.R
+import fr.alefaux.pollochon.core.designsystem.R as DesignSystemR
 
 @Composable
 fun ProfileImage(
@@ -54,7 +54,7 @@ fun ProfileImage(
 @Composable
 fun DefaultProfileImage() {
     Image(
-        painter = painterResource(id = R.drawable.ic_logo),
+        painter = painterResource(id = DesignSystemR.drawable.ic_logo),
         contentDescription = null,
         contentScale = ContentScale.Crop,
         modifier = Modifier

@@ -14,6 +14,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import fr.alefaux.pollochon.core.designsystem.theme.PollochonTheme
+import fr.alefaux.pollochon.core.designsystem.R as DesignSystemR
 
 object GenericView {
 
@@ -43,7 +44,7 @@ object GenericView {
             contentAlignment = Alignment.Center
         ) {
             Image(
-                painter = painterResource(R.drawable.ic_logo),
+                painter = painterResource(DesignSystemR.drawable.ic_logo),
                 contentDescription = null,
                 modifier = Modifier.fillMaxWidth().alpha(0.3f)
             )

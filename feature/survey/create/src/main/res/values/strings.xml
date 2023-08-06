@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="title_create_survey">Create a survey</string>
+    <string name="requirement_title_survey">Must contain between 10 and 100 characters</string>
+    <string name="create_survey_success">Nouveau survey créé</string>
+    <string name="create_survey_error">Impossible de créer un nouveau survey</string>
+    <string name="create_survey_select_type">Veuillez sélectionner le type de survey</string>
 </resources>

@@ -1,12 +1,17 @@
 package fr.alefaux.pollochon.core.designsystem.theme
 
 import androidx.compose.material.Colors
+import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ExperimentalGraphicsApi
+import androidx.core.graphics.ColorUtils
+
+const val PollochonStatesDisabled = .38f
 
 object PollochonPalette {
     val pollochonPurple50 = Color(242, 237, 242)
@@ -93,16 +98,20 @@ val pollochonLightColorPalette = PollochonColors(
     pollochonBackgroundAccent = PollochonPalette.pollochonYellow400,
     pollochonBackgroundPrimaryReversed = PollochonPalette.pollochonBlack,
     pollochonContentPrimary = PollochonPalette.pollochonBlack,
+    pollochonContentTertiary = PollochonPalette.pollochonGrey500,
+    pollochonContentAction = PollochonPalette.pollochonBlue500,
     pollochonContentNegative = PollochonPalette.pollochonRed400,
     pollochonContentWarning = PollochonPalette.pollochonOrange400,
     pollochonContentPositive = PollochonPalette.pollochonGreen400,
     pollochonContentInformation = PollochonPalette.pollochonBlue400,
     pollochonContentPrimaryReversed = PollochonPalette.pollochonWhite,
     pollochonBorderPrimary = PollochonPalette.pollochonGrey200,
+    pollochonBorderActive = PollochonPalette.pollochonBlue400,
     pollochonBorderNegative = PollochonPalette.pollochonRed400,
     pollochonBorderWarning = PollochonPalette.pollochonOrange400,
     pollochonBorderPositive = PollochonPalette.pollochonGreen400,
     pollochonBorderPrimaryReversed = PollochonPalette.pollochonBlack,
+    pollochonHoverPrimary = PollochonPalette.pollochonBlue50,
 )
 
 val pollochonDarkColorPalette = PollochonColors(
@@ -112,18 +121,23 @@ val pollochonDarkColorPalette = PollochonColors(
     pollochonBackgroundAccent = PollochonPalette.pollochonYellow400,
     pollochonBackgroundPrimaryReversed = PollochonPalette.pollochonWhite,
     pollochonContentPrimary = PollochonPalette.pollochonWhite,
+    pollochonContentTertiary = PollochonPalette.pollochonGrey300,
+    pollochonContentAction = PollochonPalette.pollochonBlue200,
     pollochonContentNegative = PollochonPalette.pollochonRed300,
     pollochonContentWarning = PollochonPalette.pollochonOrange300,
     pollochonContentPositive = PollochonPalette.pollochonConifer300,
     pollochonContentInformation = PollochonPalette.pollochonBlue300,
     pollochonContentPrimaryReversed = PollochonPalette.pollochonBlack,
     pollochonBorderPrimary = PollochonPalette.pollochonGrey700,
+    pollochonBorderActive = PollochonPalette.pollochonBlue300,
     pollochonBorderNegative = PollochonPalette.pollochonRed300,
     pollochonBorderWarning = PollochonPalette.pollochonOrange300,
     pollochonBorderPositive = PollochonPalette.pollochonConifer300,
     pollochonBorderPrimaryReversed = PollochonPalette.pollochonWhite,
+    pollochonHoverPrimary = PollochonPalette.pollochonBlue700,
 )
 
+@OptIn(ExperimentalGraphicsApi::class)
 @Stable
 class PollochonColors constructor(
     // Background
@@ -135,6 +149,8 @@ class PollochonColors constructor(
 
     // Content
     pollochonContentPrimary: Color,
+    pollochonContentTertiary: Color,
+    pollochonContentAction: Color,
     pollochonContentNegative: Color,
     pollochonContentWarning: Color,
     pollochonContentPositive: Color,
@@ -143,10 +159,18 @@ class PollochonColors constructor(
 
     // Border
     pollochonBorderPrimary: Color,
+    pollochonBorderActive: Color,
     pollochonBorderNegative: Color,
     pollochonBorderWarning: Color,
     pollochonBorderPositive: Color,
     pollochonBorderPrimaryReversed: Color,
+
+    // Hover
+    pollochonHoverPrimary: Color,
+
+    // Active
+    @Suppress("MagicNumber")
+    pollochonActiveTertiary: Color = pollochonHoverPrimary.convertByHSL(lTransform = { it * 0.93f }),
 ) {
     var pollochonBackgroundPrimary by mutableStateOf(pollochonBackgroundPrimary)
         private set
@@ -160,6 +184,10 @@ class PollochonColors constructor(
         private set
     var pollochonContentPrimary by mutableStateOf(pollochonContentPrimary)
         private set
+    var pollochonContentTertiary by mutableStateOf(pollochonContentTertiary)
+        private set
+    var pollochonContentAction by mutableStateOf(pollochonContentAction)
+        private set
     var pollochonContentNegative by mutableStateOf(pollochonContentNegative)
         private set
     var pollochonContentWarning by mutableStateOf(pollochonContentWarning)
@@ -172,6 +200,8 @@ class PollochonColors constructor(
         private set
     var pollochonBorderPrimary by mutableStateOf(pollochonBorderPrimary)
         private set
+    var pollochonBorderActive by mutableStateOf(pollochonBorderActive)
+        private set
     var pollochonBorderNegative by mutableStateOf(pollochonBorderNegative)
         private set
     var pollochonBorderWarning by mutableStateOf(pollochonBorderWarning)
@@ -179,6 +209,8 @@ class PollochonColors constructor(
     var pollochonBorderPositive by mutableStateOf(pollochonBorderPositive)
         private set
     var pollochonBorderPrimaryReversed by mutableStateOf(pollochonBorderPrimaryReversed)
+        private set
+    var pollochonActiveTertiary by mutableStateOf(pollochonActiveTertiary)
         private set
 
     fun update(other: PollochonColors) {
@@ -219,4 +251,34 @@ fun debugColors(
     error = pollochonColors.pollochonContentNegative,
     onError = pollochonColors.pollochonContentPrimaryReversed,
     isLight = !darkTheme
+)
+
+@ExperimentalGraphicsApi
+fun Color.convertByHSL(
+    hTransform: (h: Float) -> Float = { it },
+    sTransform: (s: Float) -> Float = { it },
+    lTransform: (l: Float) -> Float = { it },
+    aTransform: (a: Float) -> Float = { it }
+): Color {
+    val (h, s, l) = this.toHSL()
+    return Color.hsl(hTransform(h), sTransform(s), lTransform(l), aTransform(1f))
+}
+
+fun Color.toHSL(): HSLColor {
+    val hsl = floatArrayOf(0f, 0f, 0f)
+    @Suppress("MagicNumber")
+    ColorUtils.RGBToHSL(
+        (this.red * 255).toInt(),
+        (this.green * 255).toInt(),
+        (this.blue * 255).toInt(),
+        hsl
+    )
+    return HSLColor(hsl[0], hsl[1], hsl[2])
+}
+
+@Immutable
+data class HSLColor(
+    val h: Float,
+    val s: Float,
+    val l: Float
 )

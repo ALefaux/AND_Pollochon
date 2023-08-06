@@ -5,7 +5,6 @@ import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -18,11 +17,11 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import fr.alefaux.pollochon.core.designsystem.theme.PollochonTheme
 import fr.alefaux.pollochon.feature.home.HomeScreen
 import fr.alefaux.pollochon.feature.survey.create.CreateSurveyScreen
 import fr.alefaux.pollochon.model.Screen
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NavigationComponent() {
     val navController = rememberNavController()
@@ -58,7 +57,8 @@ fun NavigationComponent() {
                     )
                 }
             }
-        }
+        },
+        containerColor = PollochonTheme.colors.pollochonBackgroundPrimary,
     ) { innerPadding ->
         NavHost(
             navController,
@@ -66,7 +66,11 @@ fun NavigationComponent() {
             Modifier.padding(innerPadding)
         ) {
             composable(Screen.Home.route) { HomeScreen() }
-            composable(Screen.CreateSurvey.route) { CreateSurveyScreen() }
+            composable(Screen.CreateSurvey.route) {
+                CreateSurveyScreen(
+                    onAccountClicked = {}
+                )
+            }
         }
     }
 }
