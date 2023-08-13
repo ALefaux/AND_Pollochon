@@ -65,7 +65,11 @@ fun NavigationComponent() {
             startDestination = Screen.Home.route,
             Modifier.padding(innerPadding)
         ) {
-            composable(Screen.Home.route) { HomeScreen() }
+            composable(Screen.Home.route) {
+                HomeScreen(
+                    onAccountClicked = {}
+                )
+            }
             composable(Screen.CreateSurvey.route) {
                 CreateSurveyScreen(
                     onAccountClicked = {}
