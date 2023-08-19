@@ -14,7 +14,6 @@ class GetHomeSurveysUseCaseImpl(
     private val homeRepository: HomeRepository
 ) : GetHomeSurveysUseCase {
     override suspend fun invoke(): Flow<DataResponse<HomeSurveys>> {
-        val userId = settingsRepository.getUserId().firstOrNull()
         return settingsRepository.getUserId().map { userId ->
             homeRepository.getHomeSurveys(userId)
         }

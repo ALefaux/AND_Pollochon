@@ -11,6 +11,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.navigation.NavController
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.NavHost
@@ -19,15 +20,18 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import fr.alefaux.pollochon.core.designsystem.theme.PollochonTheme
 import fr.alefaux.pollochon.feature.home.HomeScreen
+import fr.alefaux.pollochon.feature.profile.ProfileScreen
 import fr.alefaux.pollochon.feature.survey.create.CreateSurveyScreen
+import fr.alefaux.pollochon.model.BottomNavScreen
 import fr.alefaux.pollochon.model.Screen
+import fr.alefaux.pollochon.model.Screens
 
 @Composable
 fun NavigationComponent() {
     val navController = rememberNavController()
     val items = listOf(
-        Screen.Home,
-        Screen.CreateSurvey,
+        BottomNavScreen.Home,
+        BottomNavScreen.CreateSurvey,
     )
     Scaffold(
         bottomBar = {
@@ -51,7 +55,7 @@ fun NavigationComponent() {
                                 // reselecting the same item
                                 launchSingleTop = true
                                 // Restore state when reselecting a previously selected item
-                                restoreState = true
+                                restoreState = false
                             }
                         }
                     )
@@ -62,19 +66,30 @@ fun NavigationComponent() {
     ) { innerPadding ->
         NavHost(
             navController,
-            startDestination = Screen.Home.route,
+            startDestination = BottomNavScreen.Home.route,
             Modifier.padding(innerPadding)
         ) {
-            composable(Screen.Home.route) {
+            composable(BottomNavScreen.Home.route) {
                 HomeScreen(
-                    onAccountClicked = {}
+                    onAccountClicked = {
+                        navController.navigateToProfile()
+                    }
                 )
             }
-            composable(Screen.CreateSurvey.route) {
+            composable(BottomNavScreen.CreateSurvey.route) {
                 CreateSurveyScreen(
-                    onAccountClicked = {}
+                    onAccountClicked = {
+                        navController.navigateToProfile()
+                    }
                 )
+            }
+            composable(Screens.Profile.route) {
+                ProfileScreen()
             }
         }
     }
+}
+
+fun NavController.navigateToProfile() {
+    navigate(Screens.Profile.route)
 }
