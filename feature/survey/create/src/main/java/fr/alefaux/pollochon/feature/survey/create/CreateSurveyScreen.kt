@@ -137,6 +137,7 @@ internal fun CreateSurveyScreen(
     ) {
         HeaderScreen(
             title = stringResource(id = R.string.title_create_survey),
+            userImageUrl = null,
             onAccountClicked = onAccountClicked,
         )
         Text(

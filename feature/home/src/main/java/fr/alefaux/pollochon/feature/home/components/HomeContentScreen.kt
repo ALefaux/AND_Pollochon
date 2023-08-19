@@ -28,6 +28,7 @@ fun HomeContentScreen(
     ) {
         HeaderScreen(
             title = stringResource(id = R.string.home_title),
+            userImageUrl = null,
             onAccountClicked = onAccountClicked
         )
         homeSurveys.invited?.let { invitedSurvey ->
