@@ -63,7 +63,7 @@ class LoginNetwork(
                 }
             }
 
-            400 -> DataResponse.BadRequest
+            400 -> DataResponse.BadRequest(null)
             409 -> DataResponse.Conflict
             else -> DataResponse.Unknown
         }

@@ -2,7 +2,6 @@ plugins {
     id("pollochon.android.application")
     id("pollochon.android.application.compose")
     id("pollochon.android.application.firebase")
-    id("kotlin-parcelize")
 }
 
 android {

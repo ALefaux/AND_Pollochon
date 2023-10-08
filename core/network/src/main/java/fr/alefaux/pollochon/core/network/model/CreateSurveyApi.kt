@@ -8,4 +8,6 @@ data class CreateSurveyApi(
     val title: String,
     val type: SurveyType,
     val ownerId: Int,
+    val endDate: String?,
+    val proposals: List<String>
 )

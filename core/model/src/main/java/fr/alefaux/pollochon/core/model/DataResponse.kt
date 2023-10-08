@@ -2,13 +2,13 @@ package fr.alefaux.pollochon.core.model
 
 sealed class DataResponse<out T : Any> {
     data class Success<out T : Any>(val data: T) : DataResponse<T>()
-    object Created : DataResponse<Nothing>()
+    data object Created : DataResponse<Nothing>()
     data class Found<out T : Any>(val data: T) : DataResponse<T>()
-    object BadRequest : DataResponse<Nothing>()
-    object Conflict : DataResponse<Nothing>()
-    object NotFound : DataResponse<Nothing>()
-    object Error : DataResponse<Nothing>()
-    object Unknown : DataResponse<Nothing>()
+    data class BadRequest(val errorResponse: ErrorResponse?) : DataResponse<Nothing>()
+    data object Conflict : DataResponse<Nothing>()
+    data object NotFound : DataResponse<Nothing>()
+    data object Error : DataResponse<Nothing>()
+    data object Unknown : DataResponse<Nothing>()
 
     fun isSuccess(): Boolean {
         return this is Success || this is Created || this is Found

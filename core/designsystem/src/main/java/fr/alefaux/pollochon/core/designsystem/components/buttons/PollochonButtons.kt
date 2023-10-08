@@ -59,6 +59,47 @@ object PollochonButtons {
         ripple = ripple,
         onClick = onClick
     )
+
+    /**
+     * The ghost button should be used for secondary actions when combined with a primary button
+     * or when you need to list multiple actions in one single view as a preference page
+     * @param text The text inside the button
+     * @param modifier The [Modifier] to be applied to the component
+     * @param icon The optional icon to be displayed at the start or the end of the button container
+     * @param iconSide If an icon is added, you can configure the side at the start or end of the button
+     * @param enabled True if you can click on the button, otherwise false
+     * @param colors The colors of the background and the content in enabled and disabled
+     * @param sizes The sizes for the text, paddings and width/height
+     * @param borders The width and color of the border in enabled and disabled
+     * @param ripple The ripple effect applied on the component
+     * @param onClick The callback to be called when the user click on the button
+     */
+    @Composable
+    fun Ghost(
+        text: String,
+        modifier: Modifier = Modifier,
+        icon: Painter? = null,
+        iconSide: IconSide = IconSide.LEFT,
+        enabled: Boolean = true,
+        colors: ButtonColors = PollochonButtonsColors.ghost(),
+        sizes: ButtonSizes = VitaminButtonsSizes.medium(),
+        borders: ButtonBorders = VitaminButtonBorders.none(),
+        ripple: RippleTheme = LocalRippleTheme.current,
+        onClick: () -> Unit
+    ) = PollochonButtonImpl(
+        text = text,
+        modifier = modifier,
+        icon = icon,
+        iconSide = iconSide,
+        enabled = enabled,
+        colors = colors,
+        sizes = sizes,
+        borders = borders,
+        ripple = ripple,
+        elevation = null,
+        onClick = onClick
+    )
+
 }
 
 enum class IconSide { LEFT, RIGHT }

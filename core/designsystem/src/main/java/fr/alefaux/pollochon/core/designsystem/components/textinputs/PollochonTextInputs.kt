@@ -12,6 +12,7 @@ import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
+import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -64,7 +65,7 @@ object PollochonTextInputs {
         textStyle: TextStyle = PollochonTheme.typography.body2,
         icon: @Composable (() -> Unit)? = null
     ) {
-        VitaminTextInputLayoutImpl(
+        PollochonTextInputLayoutImpl(
             helperText = helperText,
             counter = counter,
             colors = colors,
@@ -134,10 +135,120 @@ object PollochonTextInputs {
             modifier = modifier
         )
     }
+
+    /**
+     * Filled text input to get an input value from the user.
+     * @param value The value of your text input
+     * @param label The label to be displayed inside the text input container and pushed at the top
+     * of text input when the component takes the focus
+     * @param onValueChange The callback to be called when the user type a new character
+     * @param modifier The `Modifier` to be applied to the component
+     * @param helperText The optional helper text to be displayed at the start bottom outside the text input container
+     * @param counter The optional counter to be displayed the the end bottom outside the text input container
+     * @param maxLines The number of maximum lines the text input can have if the `singleLine` is set to `true`
+     * @param singleLine True if the text input doesn't extend their height, otherwise, false
+     * @param readOnly True if you don't want open the keyboard when the user click on the text field
+     * @param enabled True if you can type in the text input, otherwise false
+     * @param transformation Transforms the visual representation of the input value
+     * @param keyboardOptions When the text input emit an IME action, the corresponding callback is called
+     * @param keyboardActions Software keyboard options that contains such as KeyboardType and ImeAction
+     * @param interactionSource Representing the stream of interaction for the text input
+     * @param colors The color to notify your user if they are in normal, error or success state
+     * @param textStyle The typography of the text inside the text input
+     * @param icon The optional trailing icon to be displayed at the end of the text input container
+     */
+    @Composable
+    fun Filled(
+        value: String,
+        label: String,
+        onValueChange: (String) -> Unit,
+        modifier: Modifier = Modifier,
+        helperText: String? = null,
+        counter: Pair<Int, Int>? = null,
+        maxLines: Int = Int.MAX_VALUE,
+        singleLine: Boolean = false,
+        readOnly: Boolean = false,
+        enabled: Boolean = true,
+        transformation: VisualTransformation = TextInputsTransformations.none,
+        keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
+        keyboardActions: KeyboardActions = KeyboardActions.Default,
+        interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+        colors: TextInputStateColors = TextInputsState.normal(),
+        textStyle: TextStyle = PollochonTheme.typography.body2,
+        icon: @Composable (() -> Unit)? = null,
+    ) {
+        PollochonTextInputLayoutImpl(
+            helperText = helperText,
+            counter = counter,
+            colors = colors,
+            enabled = enabled,
+            textInput = {
+                TextField(
+                    value = value,
+                    onValueChange = onValueChange,
+                    label = { Text(text = label) },
+                    colors = TextFieldDefaults.textFieldColors(
+                        backgroundColor = PollochonTheme.colors.pollochonBackgroundPrimary,
+                        cursorColor = PollochonTheme.colors.pollochonContentAction,
+                        errorCursorColor = PollochonTheme.colors.pollochonContentNegative,
+                        textColor = PollochonTheme.colors.pollochonContentPrimary,
+                        disabledTextColor = PollochonTheme.colors.pollochonContentTertiary.copy(ContentAlpha.disabled),
+                        focusedIndicatorColor = colors.focusBorderColor,
+                        unfocusedIndicatorColor = colors.borderColor,
+                        disabledIndicatorColor = PollochonTheme.colors.pollochonActiveTertiary.copy(
+                            ContentAlpha.disabled,
+                        ),
+                        errorIndicatorColor = colors.borderColor,
+                        leadingIconColor = colors.iconColor,
+                        disabledLeadingIconColor = PollochonTheme.colors.pollochonActiveTertiary.copy(
+                            ContentAlpha.disabled,
+                        ),
+                        errorLeadingIconColor = colors.iconColor,
+                        trailingIconColor = colors.iconColor,
+                        disabledTrailingIconColor = PollochonTheme.colors.pollochonContentPrimary.copy(
+                            ContentAlpha.disabled,
+                        ),
+                        errorTrailingIconColor = colors.iconColor,
+                        focusedLabelColor = colors.focusTextColor,
+                        unfocusedLabelColor = colors.textColor,
+                        disabledLabelColor = PollochonTheme.colors.pollochonContentTertiary.copy(
+                            ContentAlpha.disabled,
+                        ),
+                        errorLabelColor = colors.textColor,
+                    ),
+                    textStyle = textStyle,
+                    visualTransformation = transformation,
+                    interactionSource = interactionSource,
+                    keyboardOptions = keyboardOptions,
+                    keyboardActions = keyboardActions,
+                    singleLine = singleLine,
+                    maxLines = maxLines,
+                    modifier = Modifier.fillMaxWidth().pollochonSemantics(helperText, counter),
+                    enabled = enabled,
+                    isError = colors.state == State.ERROR,
+                    readOnly = readOnly,
+                    trailingIcon = {
+                        if (icon != null && colors.state != State.SUCCESS) {
+                            icon()
+                        } else if (
+                            colors.imageVector != null &&
+                            (colors.state == State.SUCCESS || colors.state == State.ERROR)
+                        ) {
+                            Icon(
+                                imageVector = colors.imageVector,
+                                contentDescription = null,
+                            )
+                        }
+                    },
+                )
+            },
+            modifier = modifier,
+        )
+    }
 }
 
 @Composable
-internal fun VitaminTextInputLayoutImpl(
+internal fun PollochonTextInputLayoutImpl(
     helperText: String?,
     counter: Pair<Int, Int>?,
     colors: TextInputStateColors,
