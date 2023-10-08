@@ -4,5 +4,5 @@ import fr.alefaux.pollochon.core.model.DataResponse
 import fr.alefaux.pollochon.core.model.user.User
 
 interface CheckUserExistsUseCase {
-    suspend fun invoke(firebaseId: String): DataResponse<User>
+    suspend operator fun invoke(firebaseId: String): DataResponse<User>
 }

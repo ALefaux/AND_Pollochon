@@ -6,6 +6,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import fr.alefaux.pollochon.core.data.repository.SettingsRepository
 import fr.alefaux.pollochon.core.domain.hello.SayHelloUseCase
+import fr.alefaux.pollochon.core.domain.login.CheckUserExistsUseCase
 import fr.alefaux.pollochon.core.model.DataResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -20,7 +21,8 @@ import kotlinx.coroutines.runBlocking
 
 class HomeViewModel(
     private val settingsRepository: SettingsRepository,
-    private val sayHelloUseCase: SayHelloUseCase
+    private val sayHelloUseCase: SayHelloUseCase,
+    private val checkUserExistsUseCase: CheckUserExistsUseCase
 ) : ViewModel() {
     private val _uiState = MutableStateFlow<HomeUiState>(HomeUiState.Loading)
     val uiState: StateFlow<HomeUiState> = _uiState.asStateFlow()
@@ -49,7 +51,10 @@ class HomeViewModel(
     }
 
     private suspend fun checkUserIsLogged(): Boolean {
-        return Firebase.auth.currentUser != null && settingsRepository.containsUserIsLogged().first()
+        val currentUser = Firebase.auth.currentUser
+        return currentUser != null
+                && settingsRepository.containsUserIsLogged().first()
+                && (checkUserExistsUseCase(currentUser.uid) is DataResponse.Found)
     }
 
     fun listenUserIdConnected() {
@@ -65,9 +70,9 @@ class HomeViewModel(
     }
 }
 
-sealed class HomeUiState {
-    object Loading : HomeUiState()
-    object Login : HomeUiState()
-    object Logged : HomeUiState()
-    class Error(val message: String) : HomeUiState()
+sealed interface HomeUiState {
+    data object Loading : HomeUiState
+    data object Login : HomeUiState
+    data object Logged : HomeUiState
+    data class Error(val message: String) : HomeUiState
 }
