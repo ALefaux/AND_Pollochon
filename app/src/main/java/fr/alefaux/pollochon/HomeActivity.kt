@@ -33,8 +33,8 @@ class HomeActivity : ComponentActivity() {
 
             PollochonTheme {
                 when (val state = homeViewModel.uiState.collectAsState().value) {
-                    is HomeUiState.Logged -> NavigationComponent()
-                    is HomeUiState.Login -> LoginScreen()
+                    HomeUiState.Logged -> NavigationComponent()
+                    HomeUiState.Login -> LoginScreen()
                     is HomeUiState.Error -> GenericView.Error(message = state.message)
                     else -> GenericView.Error()
                 }
