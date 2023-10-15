@@ -51,7 +51,7 @@ class LoginViewModel(
                     setUserIsConnected()
                 }
 
-                DataResponse.BadRequest -> {
+                is DataResponse.BadRequest -> {
                     _creatingUserNameFlow.emit(false)
                     _createUserErrorFlow.emit(true)
                 }

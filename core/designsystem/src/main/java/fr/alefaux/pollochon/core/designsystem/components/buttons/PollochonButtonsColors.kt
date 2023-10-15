@@ -22,4 +22,16 @@ object PollochonButtonsColors {
         disabledBackgroundColor = disabledBackgroundColor,
         disabledContentColor = disabledContentColor
     )
+
+    @Composable
+    fun ghost(
+        backgroundColor: Color = Color.Transparent,
+        contentColor: Color = PollochonTheme.colors.pollochonContentAction,
+        disabledContentColor: Color = PollochonTheme.colors.pollochonContentAction
+            .copy(alpha = PollochonStatesDisabled)
+    ): ButtonColors = ButtonDefaults.textButtonColors(
+        backgroundColor = backgroundColor,
+        contentColor = contentColor,
+        disabledContentColor = disabledContentColor
+    )
 }

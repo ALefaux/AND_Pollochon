@@ -4,5 +4,8 @@
     <string name="requirement_title_survey">Must contain between 10 and 100 characters</string>
     <string name="create_survey_success">Nouveau survey créé</string>
     <string name="create_survey_error">Impossible de créer un nouveau survey</string>
+    <string name="create_survey_error_user_not_found">Utilisateur introuvable</string>
+    <string name="create_survey_error_bad_request">Échec de la création du survey</string>
     <string name="create_survey_select_type">Veuillez sélectionner le type de survey</string>
+    <string name="create_survey_make_proposals">2 propositions minimum obligatoire</string>
 </resources>

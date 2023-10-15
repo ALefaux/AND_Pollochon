@@ -6,6 +6,7 @@ import fr.alefaux.pollochon.core.model.DataResponse
 import fr.alefaux.pollochon.core.model.survey.SurveyType
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import java.util.Date
 
 class CreatePollUseCaseImpl(
     private val getUserUseCase: GetUserUseCase,
@@ -13,11 +14,13 @@ class CreatePollUseCaseImpl(
 ): CreatePollUseCase {
     override suspend operator fun invoke(
         title: String,
-        type: SurveyType
+        type: SurveyType,
+        endDate: Date?,
+        proposals: List<String>
     ): Flow<DataResponse<Unit>> {
         return getUserUseCase.getUser()
             .map { user ->
-                pollRepository.postSurvey(title, type, user.id)
+                pollRepository.postSurvey(title, type, user.id, endDate, proposals)
             }
     }
 }
