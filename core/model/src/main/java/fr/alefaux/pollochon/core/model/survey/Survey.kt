@@ -8,6 +8,5 @@ data class Survey(
     val type: SurveyType,
     val createdAt: String,
     val owner: User,
-    val answers: List<SurveyResponse>,
     val invitations: List<SurveyInvitation>
 )

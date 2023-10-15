@@ -1,72 +1,59 @@
 package fr.alefaux.pollochon.feature.survey.create.components
 
-import androidx.compose.foundation.clickable
+import android.content.Context
+import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.text.KeyboardActions
-import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.Card
-import androidx.compose.material.Icon
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import fr.alefaux.pollochon.core.designsystem.components.buttons.PollochonButtons
-import fr.alefaux.pollochon.core.designsystem.components.textinputs.PollochonTextInputs
-import fr.alefaux.pollochon.core.designsystem.pollochonicons.PollochonIcons
-import fr.alefaux.pollochon.core.designsystem.pollochonicons.icons.Line
-import fr.alefaux.pollochon.core.designsystem.pollochonicons.icons.line.Close
 import fr.alefaux.pollochon.core.designsystem.theme.PollochonTheme
+import fr.alefaux.pollochon.feature.survey.create.R
 
 @Composable
 fun CreateSurveyProposalsScreen(
     modifier: Modifier = Modifier,
+    isSendingSurvey: Boolean,
     proposals: List<String>,
-    proposal: String,
-    onProposalTextChanged: (String) -> Unit,
-    onProposalValidated: (Int?, String) -> Unit,
-    onPreviousClicked: () -> Unit,
-    onValidateClicked: () -> Unit
+    onPreviousClicked: (List<String>) -> Unit,
+    onValidateClicked: (List<String>) -> Unit,
 ) {
+    val context: Context = LocalContext.current
+    var proposalsState by remember { mutableStateOf(proposals) }
+
     Column(
         modifier = modifier
     ) {
         CreateSurveyProposals(
-            proposals = proposals,
-            onProposalClicked = { index, proposal ->
-
+            proposals = proposalsState,
+            onAddProposalClicked = {
+                val newProposals = proposalsState.toMutableList()
+                newProposals.add("")
+                proposalsState = newProposals
             },
             onDeleteClicked = { index ->
-
+                val newProposals = proposalsState.toMutableList()
+                newProposals.removeAt(index)
+                proposalsState = newProposals
+            },
+            onProposalTextChanged = { index, text ->
+                val newProposals = proposalsState.toMutableList()
+                newProposals[index] = text
+                proposalsState = newProposals
             }
         )
-        Card {
-            PollochonTextInputs.Filled(
-                value = proposal,
-                label = "Proposal text",
-                onValueChange = onProposalTextChanged,
-                icon = {
-                    Icon(
-                        modifier = Modifier.clickable {
-                            onProposalTextChanged("")
-                        },
-                        imageVector = PollochonIcons.Line.Close,
-                        contentDescription = null,
-                    )
-                },
-                keyboardActions = KeyboardActions {
-                    if (proposal.isNotBlank()) {
-                        onProposalValidated(null, proposal)
-                    }
-                },
-                keyboardOptions = KeyboardOptions(
-                    imeAction = ImeAction.Done,
-                ),
-            )
-        }
         Spacer(modifier = Modifier.weight(1f))
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -74,12 +61,33 @@ fun CreateSurveyProposalsScreen(
         ) {
             PollochonButtons.Ghost(
                 text = "Précédent",
-                onClick = onPreviousClicked
+                onClick = {
+                    onPreviousClicked(proposalsState)
+                }
             )
-            PollochonButtons.Primary(
-                text = "Créer",
-                onClick = onValidateClicked
-            )
+            Box(
+                contentAlignment = Alignment.Center,
+            ) {
+                PollochonButtons.Primary(
+                    text = if(isSendingSurvey) "" else "Créer",
+                    onClick = {
+                        if (proposalsState.size >= 2) {
+                            onValidateClicked(proposalsState)
+                        } else {
+                            Toast.makeText(
+                                context,
+                                context.getString(R.string.create_survey_make_proposals),
+                                Toast.LENGTH_LONG
+                            ).show()
+                        }
+                    }
+                )
+                if(isSendingSurvey) {
+                    CircularProgressIndicator(
+                        color = PollochonTheme.colors.pollochonContentPrimaryReversed
+                    )
+                }
+            }
         }
     }
 }
@@ -89,12 +97,10 @@ fun CreateSurveyProposalsScreen(
 fun CreateSurveyProposalsScreenPreview() {
     PollochonTheme {
         CreateSurveyProposalsScreen(
-            proposals = listOf("Prop 1", "Prop 2"),
-            proposal = "Prop 3",
-            onProposalTextChanged = {},
-            onProposalValidated = { _, _ -> },
+            proposals = emptyList(),
+            isSendingSurvey = false,
             onPreviousClicked = {},
-            onValidateClicked = {}
+            onValidateClicked = {},
         )
     }
 }

@@ -10,10 +10,15 @@ import androidx.compose.material.Card
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import fr.alefaux.pollochon.core.designsystem.components.buttons.PollochonButtons
 import fr.alefaux.pollochon.core.designsystem.pollochonicons.PollochonIcons
 import fr.alefaux.pollochon.core.designsystem.pollochonicons.icons.Line
 import fr.alefaux.pollochon.core.designsystem.pollochonicons.icons.line.DeleteBin
@@ -23,8 +28,9 @@ import fr.alefaux.pollochon.core.designsystem.theme.PollochonTheme
 internal fun CreateSurveyProposals(
     modifier: Modifier = Modifier,
     proposals: List<String>,
-    onProposalClicked: (Int, String) -> Unit,
+    onAddProposalClicked: () -> Unit,
     onDeleteClicked: (Int) -> Unit,
+    onProposalTextChanged: (Int, String) -> Unit
 ) {
     Column(
         modifier = modifier
@@ -36,38 +42,17 @@ internal fun CreateSurveyProposals(
             color = PollochonTheme.colors.pollochonContentPrimary,
         )
         proposals.forEachIndexed { index, proposal ->
-            Card(
-                modifier = Modifier
-                    .padding(bottom = 8.dp)
-                    .clickable {
-                        onProposalClicked(index, proposal)
-                    },
-            ) {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(16.dp),
-                    verticalAlignment = Alignment.CenterVertically,
-                ) {
-                    Text(
-                        modifier = Modifier
-                            .padding(start = 16.dp)
-                            .weight(1f),
-                        text = proposal,
-                        style = PollochonTheme.typography.body2,
-                    )
-                    Icon(
-                        modifier = Modifier
-                            .padding(16.dp)
-                            .clickable {
-                                onDeleteClicked(index)
-                            },
-                        imageVector = PollochonIcons.Line.DeleteBin,
-                        contentDescription = null
-                    )
-                }
-            }
+            CreateSurveyProposalCard(
+                index = index,
+                proposal = proposal,
+                onProposalTextChanged = onProposalTextChanged,
+                onDeleteClicked = onDeleteClicked
+            )
         }
+        PollochonButtons.Primary(
+            text = "Ajouter",
+            onClick = onAddProposalClicked
+        )
     }
 }
 
@@ -77,8 +62,9 @@ fun CreateSurveyProposalsPreview() {
     PollochonTheme {
         CreateSurveyProposals(
             proposals = listOf("Prop 1", "Prop 2"),
-            onProposalClicked = { _, _ -> },
-            onDeleteClicked = {}
+            onAddProposalClicked = {},
+            onDeleteClicked = {},
+            onProposalTextChanged = { _, _ -> }
         )
     }
 }

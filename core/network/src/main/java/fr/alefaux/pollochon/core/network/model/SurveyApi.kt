@@ -10,9 +10,10 @@ data class SurveyApi(
     val title: String,
     val type: SurveyType,
     val createdAt: String,
+    val endDate: String?,
     val owner: UserApi,
-    val answers: List<SurveyResponseApi>,
-    val invitations: List<SurveyInvitationApi>
+    val invitations: List<SurveyInvitationApi>,
+    val proposals: List<ProposalApi>
 ) {
     fun toSurvey(): Survey {
         return Survey(
@@ -21,7 +22,6 @@ data class SurveyApi(
             type = type,
             createdAt = createdAt,
             owner = owner.toUser(),
-            answers = answers.map { it.toSurveyResponse() },
             invitations = invitations.map { it.toSurveyInvitation() }
         )
     }
