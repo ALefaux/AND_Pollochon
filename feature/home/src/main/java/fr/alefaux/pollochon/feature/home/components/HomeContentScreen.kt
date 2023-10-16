@@ -3,14 +3,13 @@ package fr.alefaux.pollochon.feature.home.components
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
+import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import fr.alefaux.pollochon.core.designsystem.components.HeaderScreen
 import fr.alefaux.pollochon.core.designsystem.theme.PollochonTheme
+import fr.alefaux.pollochon.core.designsystem.values.Paddings
 import fr.alefaux.pollochon.feature.home.R
 import fr.alefaux.pollochon.feature.home.models.HomeSurveysUi
 import fr.alefaux.pollochon.feature.home.models.mock.homeSurveysUiMock
@@ -18,45 +17,47 @@ import fr.alefaux.pollochon.feature.home.models.mock.homeSurveysUiMock
 @Composable
 fun HomeContentScreen(
     modifier: Modifier = Modifier,
-    homeSurveys: HomeSurveysUi,
-    onAccountClicked: () -> Unit,
-
+    homeSurveys: HomeSurveysUi
 ) {
     Column(
-        modifier = modifier.padding(horizontal = 16.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+        modifier = modifier
     ) {
-        HeaderScreen(
-            title = stringResource(id = R.string.home_title),
-            userImageUrl = null,
-            onAccountClicked = onAccountClicked
+        HomeHeader(
+            modifier = Modifier.padding(horizontal = Paddings.screen),
+            title = stringResource(id = R.string.home_title)
         )
-        homeSurveys.invited?.let { invitedSurvey ->
-            HomeContentSection(
-                title = "Surveys invités",
-                lastSurvey = invitedSurvey,
-                onSeeAllClicked = {},
-                onSurveyClicked = {},
-                onShareSurveyClicked = {},
-            )
-        }
-        homeSurveys.own?.let { ownSurvey ->
-            HomeContentSection(
-                title = "Vos surveys",
-                lastSurvey = ownSurvey,
-                onSeeAllClicked = {},
-                onSurveyClicked = {},
-                onShareSurveyClicked = {},
-            )
-        }
-        homeSurveys.participated?.let { participatedSurvey ->
-            HomeContentSection(
-                title = "Surveys participés",
-                lastSurvey = participatedSurvey,
-                onSeeAllClicked = {},
-                onSurveyClicked = {},
-                onShareSurveyClicked = {},
-            )
+        Column(
+            modifier = Modifier.padding(horizontal = Paddings.screen)
+                .padding(bottom = Paddings.screen),
+            verticalArrangement = Arrangement.spacedBy(Paddings.medium)
+        ) {
+            homeSurveys.invited?.let { invitedSurvey ->
+                HomeContentSection(
+                    title = "Surveys invités",
+                    lastSurvey = invitedSurvey,
+                    onSeeAllClicked = {},
+                    onSurveyClicked = {},
+                    onShareSurveyClicked = {},
+                )
+            }
+            homeSurveys.own?.let { ownSurvey ->
+                HomeContentSection(
+                    title = "Vos surveys",
+                    lastSurvey = ownSurvey,
+                    onSeeAllClicked = {},
+                    onSurveyClicked = {},
+                    onShareSurveyClicked = {},
+                )
+            }
+            homeSurveys.participated?.let { participatedSurvey ->
+                HomeContentSection(
+                    title = "Surveys participés",
+                    lastSurvey = participatedSurvey,
+                    onSeeAllClicked = {},
+                    onSurveyClicked = {},
+                    onShareSurveyClicked = {},
+                )
+            }
         }
     }
 }
@@ -68,8 +69,7 @@ fun HomeContentScreenPreview() {
         Scaffold { paddingValues ->
             HomeContentScreen(
                 modifier = Modifier.padding(paddingValues),
-                homeSurveys = homeSurveysUiMock,
-                onAccountClicked = {}
+                homeSurveys = homeSurveysUiMock
             )
         }
     }

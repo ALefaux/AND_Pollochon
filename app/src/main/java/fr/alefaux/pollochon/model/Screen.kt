@@ -15,10 +15,11 @@ sealed class BottomNavScreen(
 ): Screen(route) {
     data object Home : BottomNavScreen("home", R.string.screen_home_name, R.drawable.ic_home)
     data object CreateSurvey : BottomNavScreen("survey/create", R.string.screen_create_survey, R.drawable.ic_add)
+    data object Profile: BottomNavScreen("profile", R.string.screen_profile_name, R.drawable.ic_home)
 }
 
 sealed class Screens(
     route: String
 ): Screen(route) {
-    data object Profile: Screens("profile")
+    // data object Profile: Screens("profile")
 }

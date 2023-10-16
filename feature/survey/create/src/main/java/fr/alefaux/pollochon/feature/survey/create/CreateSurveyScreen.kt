@@ -1,16 +1,16 @@
 package fr.alefaux.pollochon.feature.survey.create
 
 import android.widget.Toast
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.Text
+import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
-import fr.alefaux.pollochon.core.designsystem.components.HeaderScreen
+import fr.alefaux.pollochon.core.designsystem.values.Paddings
 import fr.alefaux.pollochon.feature.survey.create.components.CreateSurveyPrincipalInfoScreen
 import fr.alefaux.pollochon.feature.survey.create.components.CreateSurveyProposalsScreen
 import fr.alefaux.pollochon.feature.survey.create.models.CreateResultState
@@ -20,8 +20,7 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun CreateSurveyScreen(
     modifier: Modifier = Modifier,
-    viewModel: CreateSurveyViewModel = koinViewModel(),
-    onAccountClicked: () -> Unit,
+    viewModel: CreateSurveyViewModel = koinViewModel()
 ) {
     when (val state = viewModel.createResultState.collectAsState().value) {
         CreateResultState.Success -> {
@@ -47,16 +46,15 @@ fun CreateSurveyScreen(
 
     Column(
         modifier = modifier
-            .padding(8.dp),
-        verticalArrangement = Arrangement.SpaceBetween,
     ) {
-        HeaderScreen(
-            title = stringResource(id = R.string.title_create_survey),
-            userImageUrl = null,
-            onAccountClicked = onAccountClicked,
+        TopAppBar(
+            title = {
+                Text(text = stringResource(id = R.string.title_create_survey))
+            }
         )
         when (val state = viewModel.uiState.collectAsState().value) {
             is CreateSurveyUiState.PrincipalInfo -> CreateSurveyPrincipalInfoScreen(
+                modifier = Modifier.padding(all = Paddings.screen),
                 createSurveyUi = state.createSurveyUi,
                 onNextClicked = { title, surveyType, endDate ->
                     viewModel.nextPage(title, surveyType, endDate)
@@ -64,6 +62,7 @@ fun CreateSurveyScreen(
             )
 
             is CreateSurveyUiState.Proposals -> CreateSurveyProposalsScreen(
+                modifier = Modifier.padding(all = Paddings.screen),
                 proposals = state.proposals,
                 isSendingSurvey = viewModel.loadingState.collectAsState().value,
                 onPreviousClicked = { proposals ->

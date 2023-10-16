@@ -18,11 +18,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import fr.alefaux.pollochon.core.designsystem.components.buttons.PollochonButtons
 import fr.alefaux.pollochon.core.designsystem.components.textinputs.PollochonTextInputs
 import fr.alefaux.pollochon.core.designsystem.components.textinputs.TextInputsState
 import fr.alefaux.pollochon.core.designsystem.theme.PollochonTheme
+import fr.alefaux.pollochon.core.designsystem.values.Paddings
 import fr.alefaux.pollochon.core.model.survey.SurveyType
 import fr.alefaux.pollochon.feature.survey.create.R
 import fr.alefaux.pollochon.feature.survey.create.models.CreateSurveyUi
@@ -47,7 +47,7 @@ fun CreateSurveyPrincipalInfoScreen(
         modifier = modifier
     ) {
         Text(
-            modifier = Modifier.padding(top = 16.dp, bottom = 8.dp),
+            modifier = Modifier.padding(bottom = Paddings.small),
             text = "Name (mandatory)",
             style = PollochonTheme.typography.body2Bold,
             color = PollochonTheme.colors.pollochonContentPrimary,
