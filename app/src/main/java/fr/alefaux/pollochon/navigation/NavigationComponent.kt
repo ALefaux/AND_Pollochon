@@ -11,7 +11,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.navigation.NavController
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.NavHost
@@ -23,8 +22,6 @@ import fr.alefaux.pollochon.feature.home.HomeScreen
 import fr.alefaux.pollochon.feature.profile.ProfileScreen
 import fr.alefaux.pollochon.feature.survey.create.CreateSurveyScreen
 import fr.alefaux.pollochon.model.BottomNavScreen
-import fr.alefaux.pollochon.model.Screen
-import fr.alefaux.pollochon.model.Screens
 
 @Composable
 fun NavigationComponent() {
@@ -32,6 +29,7 @@ fun NavigationComponent() {
     val items = listOf(
         BottomNavScreen.Home,
         BottomNavScreen.CreateSurvey,
+        BottomNavScreen.Profile
     )
     Scaffold(
         bottomBar = {
@@ -70,26 +68,14 @@ fun NavigationComponent() {
             Modifier.padding(innerPadding)
         ) {
             composable(BottomNavScreen.Home.route) {
-                HomeScreen(
-                    onAccountClicked = {
-                        navController.navigateToProfile()
-                    }
-                )
+                HomeScreen()
             }
             composable(BottomNavScreen.CreateSurvey.route) {
-                CreateSurveyScreen(
-                    onAccountClicked = {
-                        navController.navigateToProfile()
-                    }
-                )
+                CreateSurveyScreen()
             }
-            composable(Screens.Profile.route) {
+            composable(BottomNavScreen.Profile.route) {
                 ProfileScreen()
             }
         }
     }
-}
-
-fun NavController.navigateToProfile() {
-    navigate(Screens.Profile.route)
 }

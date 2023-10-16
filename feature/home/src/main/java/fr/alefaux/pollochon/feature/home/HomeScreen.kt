@@ -11,8 +11,7 @@ import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun HomeScreen(
-    viewModel: HomeViewModel = koinViewModel(),
-    onAccountClicked: () -> Unit
+    viewModel: HomeViewModel = koinViewModel()
 ) {
     val uiState: HomeUiState = viewModel.homeUiState.collectAsState().value
 
@@ -21,21 +20,18 @@ fun HomeScreen(
     }
 
     HomeScreen(
-        uiState = uiState,
-        onAccountClicked = onAccountClicked
+        uiState = uiState
     )
 }
 
 @Composable
 internal fun HomeScreen(
-    uiState: HomeUiState,
-    onAccountClicked: () -> Unit,
+    uiState: HomeUiState
 ) {
     when (uiState) {
         HomeUiState.Loading -> LoadingScreen()
         is HomeUiState.Loaded -> HomeContentScreen(
-            homeSurveys = uiState.homeSurveys,
-            onAccountClicked = onAccountClicked,
+            homeSurveys = uiState.homeSurveys
         )
         HomeUiState.Error -> GenericView.Error()
         HomeUiState.Empty -> GenericView.Empty()
