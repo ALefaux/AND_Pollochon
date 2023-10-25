@@ -19,7 +19,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import fr.alefaux.pollochon.core.designsystem.theme.PollochonTheme
 import fr.alefaux.pollochon.feature.home.HomeScreen
-import fr.alefaux.pollochon.feature.profile.ProfileScreen
+import fr.alefaux.pollochon.feature.profile.navigation.ProfileNavHost
 import fr.alefaux.pollochon.feature.survey.create.CreateSurveyScreen
 import fr.alefaux.pollochon.model.BottomNavScreen
 
@@ -74,7 +74,7 @@ fun NavigationComponent() {
                 CreateSurveyScreen()
             }
             composable(BottomNavScreen.Profile.route) {
-                ProfileScreen()
+                ProfileNavHost()
             }
         }
     }

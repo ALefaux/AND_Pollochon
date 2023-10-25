@@ -4,11 +4,11 @@ import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFact
 import fr.alefaux.pollochon.core.network.BuildConfig
 import fr.alefaux.pollochon.core.network.HelloNetworkDataSource
 import fr.alefaux.pollochon.core.network.HomeNetworkDataSource
-import fr.alefaux.pollochon.core.network.LoginNetworkDataSource
+import fr.alefaux.pollochon.core.network.UserNetworkDataSource
 import fr.alefaux.pollochon.core.network.PollNetworkDataSource
 import fr.alefaux.pollochon.core.network.retrofit.HelloNetwork
 import fr.alefaux.pollochon.core.network.retrofit.HomeNetwork
-import fr.alefaux.pollochon.core.network.retrofit.LoginNetwork
+import fr.alefaux.pollochon.core.network.retrofit.UserNetwork
 import fr.alefaux.pollochon.core.network.retrofit.PollNetwork
 import kotlinx.serialization.json.Json
 import okhttp3.Call
@@ -47,7 +47,7 @@ val networkModule = module {
     factory<HelloNetworkDataSource> { HelloNetwork(get()) }
 
     // Login
-    factory<LoginNetworkDataSource> { LoginNetwork(get()) }
+    factory<UserNetworkDataSource> { UserNetwork(get()) }
 
     // Home
     factory<HomeNetworkDataSource> { HomeNetwork(get()) }

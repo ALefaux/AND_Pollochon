@@ -18,6 +18,7 @@ fun ProfileScreen(
         is ProfileState.Loading -> LoadingScreen()
         is ProfileState.Loaded -> ProfileContent(
             profileUi = state.profileUi,
+            friendsState = viewModel.friends.collectAsState().value,
             onLogoutButtonClicked = {
                 viewModel.logout()
             }

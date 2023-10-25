@@ -1,4 +1,4 @@
-package fr.alefaux.pollochon.feature.home.components
+package fr.alefaux.pollochon.core.designsystem.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -15,17 +15,13 @@ import fr.alefaux.pollochon.core.designsystem.pollochonicons.PollochonIcons
 import fr.alefaux.pollochon.core.designsystem.pollochonicons.icons.Line
 import fr.alefaux.pollochon.core.designsystem.pollochonicons.icons.line.ArrowRight
 import fr.alefaux.pollochon.core.designsystem.theme.PollochonTheme
-import fr.alefaux.pollochon.feature.home.models.SurveyUi
-import fr.alefaux.pollochon.feature.home.models.mock.surveyUiMock
 
 @Composable
-fun HomeContentSection(
+fun Section(
     modifier: Modifier = Modifier,
     title: String,
-    lastSurvey: SurveyUi,
     onSeeAllClicked: () -> Unit,
-    onSurveyClicked: (Int) -> Unit,
-    onShareSurveyClicked: (Int) -> Unit,
+    content: @Composable () -> Unit
 ) {
     Column(
         modifier = modifier,
@@ -51,24 +47,18 @@ fun HomeContentSection(
                 }
             )
         }
-        SurveyItem(
-            survey = lastSurvey,
-            onSurveyClicked = onSurveyClicked,
-            onShareSurveyClicked = onShareSurveyClicked,
-        )
+        content()
     }
 }
 
 @Composable
 @Preview(showBackground = true, showSystemUi = true)
-fun HomeContentSectionPreview() {
+fun SectionPreview() {
     PollochonTheme {
-        HomeContentSection(
+        Section(
             title = "Home content section",
-            lastSurvey = surveyUiMock,
             onSeeAllClicked = {},
-            onSurveyClicked = {},
-            onShareSurveyClicked = {},
+            content = {}
         )
     }
 }

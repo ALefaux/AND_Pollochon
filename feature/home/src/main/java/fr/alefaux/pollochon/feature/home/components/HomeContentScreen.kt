@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import fr.alefaux.pollochon.core.designsystem.components.Section
 import fr.alefaux.pollochon.core.designsystem.theme.PollochonTheme
 import fr.alefaux.pollochon.core.designsystem.values.Paddings
 import fr.alefaux.pollochon.feature.home.R
@@ -27,36 +28,46 @@ fun HomeContentScreen(
             title = stringResource(id = R.string.home_title)
         )
         Column(
-            modifier = Modifier.padding(horizontal = Paddings.screen)
+            modifier = Modifier
+                .padding(horizontal = Paddings.screen)
                 .padding(bottom = Paddings.screen),
             verticalArrangement = Arrangement.spacedBy(Paddings.medium)
         ) {
             homeSurveys.invited?.let { invitedSurvey ->
-                HomeContentSection(
+                Section(
                     title = "Surveys invités",
-                    lastSurvey = invitedSurvey,
                     onSeeAllClicked = {},
-                    onSurveyClicked = {},
-                    onShareSurveyClicked = {},
-                )
+                ) {
+                    SurveyItem(
+                        survey = invitedSurvey,
+                        onSurveyClicked = {},
+                        onShareSurveyClicked = {}
+                    )
+                }
             }
             homeSurveys.own?.let { ownSurvey ->
-                HomeContentSection(
+                Section(
                     title = "Vos surveys",
-                    lastSurvey = ownSurvey,
                     onSeeAllClicked = {},
-                    onSurveyClicked = {},
-                    onShareSurveyClicked = {},
-                )
+                ) {
+                    SurveyItem(
+                        survey = ownSurvey,
+                        onSurveyClicked = {},
+                        onShareSurveyClicked = {}
+                    )
+                }
             }
             homeSurveys.participated?.let { participatedSurvey ->
-                HomeContentSection(
+                Section(
                     title = "Surveys participés",
-                    lastSurvey = participatedSurvey,
                     onSeeAllClicked = {},
-                    onSurveyClicked = {},
-                    onShareSurveyClicked = {},
-                )
+                ) {
+                    SurveyItem(
+                        survey = participatedSurvey,
+                        onSurveyClicked = {},
+                        onShareSurveyClicked = {}
+                    )
+                }
             }
         }
     }

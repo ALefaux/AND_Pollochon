@@ -13,6 +13,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import fr.alefaux.pollochon.core.designsystem.components.buttons.PollochonButtons
 import fr.alefaux.pollochon.core.designsystem.theme.PollochonTheme
+import fr.alefaux.pollochon.feature.profile.component.friends.FriendsSection
+import fr.alefaux.pollochon.feature.profile.model.FriendsState
 import fr.alefaux.pollochon.feature.profile.model.ProfileUi
 import fr.alefaux.pollochon.feature.profile.model.mock.profileUiMock
 
@@ -20,6 +22,7 @@ import fr.alefaux.pollochon.feature.profile.model.mock.profileUiMock
 fun ProfileContent(
     modifier: Modifier = Modifier,
     profileUi: ProfileUi,
+    friendsState: FriendsState,
     onLogoutButtonClicked: () -> Unit,
 ) {
     Column(
@@ -38,6 +41,11 @@ fun ProfileContent(
             style = PollochonTheme.typography.h4,
             color = PollochonTheme.colors.pollochonContentPrimary,
         )
+        FriendsSection(
+            friendsState = friendsState,
+            onAddFriendClicked = {},
+            seeAllClicked = {}
+        )
         Spacer(modifier = Modifier.weight(1f))
         PollochonButtons.Primary(
             modifier = Modifier.fillMaxWidth(),
@@ -53,6 +61,7 @@ fun ProfileContentPreview() {
     PollochonTheme {
         ProfileContent(
             profileUi = profileUiMock,
+            friendsState = FriendsState.Loading,
             onLogoutButtonClicked = {}
         )
     }

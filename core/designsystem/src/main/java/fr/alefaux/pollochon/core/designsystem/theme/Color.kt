@@ -94,6 +94,7 @@ object PollochonPalette {
 val pollochonLightColorPalette = PollochonColors(
     pollochonBackgroundPrimary = PollochonPalette.pollochonWhite,
     pollochonBackgroundSecondary = PollochonPalette.pollochonGrey50,
+    pollochonBackgroundTertiary = PollochonPalette.pollochonGrey100,
     pollochonBackgroundBrandPrimary = PollochonPalette.pollochonBlue400,
     pollochonBackgroundAccent = PollochonPalette.pollochonYellow400,
     pollochonBackgroundPrimaryReversed = PollochonPalette.pollochonBlack,
@@ -117,6 +118,7 @@ val pollochonLightColorPalette = PollochonColors(
 val pollochonDarkColorPalette = PollochonColors(
     pollochonBackgroundPrimary = PollochonPalette.pollochonGrey900,
     pollochonBackgroundSecondary = PollochonPalette.pollochonBlack,
+    pollochonBackgroundTertiary = PollochonPalette.pollochonGrey800,
     pollochonBackgroundBrandPrimary = PollochonPalette.pollochonBlue300,
     pollochonBackgroundAccent = PollochonPalette.pollochonYellow400,
     pollochonBackgroundPrimaryReversed = PollochonPalette.pollochonWhite,
@@ -143,6 +145,7 @@ class PollochonColors constructor(
     // Background
     pollochonBackgroundPrimary: Color,
     pollochonBackgroundSecondary: Color,
+    pollochonBackgroundTertiary: Color,
     pollochonBackgroundBrandPrimary: Color,
     pollochonBackgroundAccent: Color,
     pollochonBackgroundPrimaryReversed: Color,
@@ -175,6 +178,8 @@ class PollochonColors constructor(
     var pollochonBackgroundPrimary by mutableStateOf(pollochonBackgroundPrimary)
         private set
     var pollochonBackgroundSecondary by mutableStateOf(pollochonBackgroundSecondary)
+        private set
+    var pollochonBackgroundTertiary by mutableStateOf(pollochonBackgroundTertiary)
         private set
     var pollochonBackgroundBrandPrimary by mutableStateOf(pollochonBackgroundBrandPrimary)
         private set
