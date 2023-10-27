@@ -6,17 +6,29 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import fr.alefaux.pollochon.feature.profile.ProfileScreen
+import fr.alefaux.pollochon.feature.profile.screen.friends.FriendsScreen
+import fr.alefaux.pollochon.feature.profile.screen.profile.ProfileScreen
 
 @Composable
 fun ProfileNavHost(
     modifier: Modifier = Modifier
-) = NavHost(
-    modifier = modifier,
-    navController = rememberNavController(),
-    startDestination = ProfileDestination.root
 ) {
-    composable(ProfileDestination.root) {
-        ProfileScreen()
+    val navHostController = rememberNavController()
+
+    NavHost(
+        modifier = modifier,
+        navController = navHostController,
+        startDestination = ProfileDestination.root
+    ) {
+        composable(ProfileDestination.root) {
+            ProfileScreen(
+                onSeeAllFriendsScreen = {
+                    navHostController.navigate(ProfileDestination.Friends.route)
+                }
+            )
+        }
+        composable(ProfileDestination.Friends.route) {
+            FriendsScreen()
+        }
     }
 }

@@ -1,4 +1,4 @@
-package fr.alefaux.pollochon.feature.profile.component
+package fr.alefaux.pollochon.feature.profile.screen.profile.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable

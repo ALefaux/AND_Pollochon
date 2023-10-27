@@ -1,4 +1,4 @@
-package fr.alefaux.pollochon.feature.profile.component.friends
+package fr.alefaux.pollochon.feature.profile.screen.profile.component.friends
 
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -6,19 +6,18 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import fr.alefaux.pollochon.core.model.user.User
+import fr.alefaux.pollochon.core.designsystem.components.skeletons.skeleton
 
 @Composable
-fun FriendsSectionLoaded(
-    modifier: Modifier = Modifier,
-    friends: List<User>
+fun FriendsSectionLoading(
+    modifier: Modifier = Modifier
 ) = LazyVerticalGrid(
-    modifier = modifier,
+    modifier = modifier.skeleton(),
     columns = GridCells.Adaptive(minSize = 128.dp)
 ) {
-    friends.forEach { friend ->
+    (1..6).forEach { index ->
         item {
-            Text(text = "Item ${friend.userName}")
+            Text(text = "Item $index")
         }
     }
 }

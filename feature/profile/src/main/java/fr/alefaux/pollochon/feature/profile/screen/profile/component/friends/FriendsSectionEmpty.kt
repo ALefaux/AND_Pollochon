@@ -1,4 +1,4 @@
-package fr.alefaux.pollochon.feature.profile.component.friends
+package fr.alefaux.pollochon.feature.profile.screen.profile.component.friends
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Text
